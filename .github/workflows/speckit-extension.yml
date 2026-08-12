@@ -1,0 +1,87 @@
+name: Pack & Publish Spec-Kit Extension
+
+# Packs the spec-kit extension (speckit-ext/) into a ZIP and publishes it as a
+# downloadable artifact, plus a GitHub Release on version tags.
+#   - Install from artifact/zip:  specify extension add <name> --from <zip-url>
+#   - Release zip layout: extension.yml sits at the ZIP root (spec-kit expects this).
+
+on:
+  push:
+    branches: [main, feat/speckit-extension]
+    tags: ["v*"]
+  pull_request:
+    branches: [main, feat/speckit-extension]
+    paths: ["speckit-ext/**"]
+  workflow_dispatch:
+
+concurrency:
+  group: speckit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: Validate & pack
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      zip_name: ${{ steps.pack.outputs.zip_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from manifest
+        id: version
+        run: |
+          VERSION=$(sed -n 's/^  version: "\([^"]*\)".*/\1/p' speckit-ext/extension.yml | head -1)
+          if [ -z "$VERSION" ]; then echo "::error::could not extract version from extension.yml"; exit 1; fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "manifest version: $VERSION"
+
+      - name: Validate manifest (schema v1.0 conformance)
+        run: |
+          set -e
+          test -f speckit-ext/extension.yml
+          grep -q 'schema_version: "1.0"' speckit-ext/extension.yml
+          grep -Eq '^  id: "[a-z0-9-]*"' speckit-ext/extension.yml
+          # every referenced command file must exist
+          while read -r f; do
+            [ -f "speckit-ext/$f" ] || { echo "::error::missing command file $f"; exit 1; }
+          done < <(sed -n 's/^      file: "\([^"]*\)"$/\1/p' speckit-ext/extension.yml)
+          echo "manifest schema OK; referenced files present"
+
+      - name: Pack ZIP
+        id: pack
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          ZIP="dist/hermes-foundation-speckit-${VERSION}.zip"
+          mkdir -p dist
+          (cd speckit-ext && zip -r "../$ZIP" . -x '.*')
+          echo "zip_name=$(basename "$ZIP")" >> "$GITHUB_OUTPUT"
+          echo "packed: $(basename "$ZIP") ($(du -h "$ZIP" | cut -f1))"
+          echo "--- zip contents ---"
+          unzip -l "$ZIP"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: speckit-extension
+          path: dist/*.zip
+          if-no-files-found: error
+          retention-days: 30
+
+  release:
+    name: Publish GitHub Release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: speckit-extension
+          path: dist
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
