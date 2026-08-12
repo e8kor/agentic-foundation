@@ -1,9 +1,9 @@
-# Foundation — Self-Managing Agent Skill Framework
+# Agentic Foundation — Self-Managing Agent Skill Framework
 
 A portable, **dependency-free** skill framework that gives any coding agent
-(GitHub Copilot, Claude Code, Codex, Hermes) a "self-improving" nature: it
-maintains its own **skills, memory, and user profile** across sessions, and is
-open to **extensions/plugins** — all through plain files and instructions, with
+(GitHub Copilot, Claude Code, Codex) a "self-improving" nature: it maintains its
+own **skills, memory, user profile, and learnings** across sessions, and is open
+to **extensions/plugins** — all through plain files and instructions, with
 **zero software dependencies** (the only tool is a Python-stdlib validator).
 
 This is the framework core. It is not a task skill; it is the seed every skill
@@ -13,19 +13,19 @@ and plugin plugs into.
 
 ## What it gives you
 
-- **Four durable stores** (kept separate):
+- **Five durable stores** (kept separate):
   - `memory/memory.md` — semantic memory: durable *environment facts*
   - `memory/profile.md` — *who the user is* (role, voice, preferences)
-  - `core-skills/` + `extensions/` — procedural knowledge (reusable SKILL.md)
   - `memory/episodic/` — session history (*what happened*, not what is true)
+  - `learnings/` — distilled *how-to-work-efficiently* knowledge
+  - `core-skills/` + `extensions/` — procedural knowledge (reusable SKILL.md)
 - **An open extension system**: `extensions/<plugin>/plugin.yaml` manifests that
   plug into named **extension points** — `skill`, `memory`, `tool`, `hook`,
   `policy`, `adapter`, `mcp`.
 - **A safe curator**: usage tracking → stale → archive (never delete), with
   backup + pin protection and a provenance gate.
 - **Cross-agent adapters**: the same framework installs into GitHub Copilot
-  (via `AGENTS.md` / `.github/`), Claude Code (`.claude/skills/`), Codex, and
-  Hermes.
+  (via `AGENTS.md` / `.github/`), Claude Code (`.claude/skills/`), and Codex.
 
 ---
 
@@ -48,8 +48,8 @@ Copilot Agent reads this repo automatically via:
 ### Claude Code
 Copy `SKILL.md` → `.claude/skills/foundation-core/SKILL.md` (or the whole tree).
 
-### Codex / Hermes
-Codex reads `AGENTS.md`; Hermes reads `~/.hermes/skills/<category>/<name>/`.
+### Codex
+Codex reads `AGENTS.md` at the repo root.
 
 ---
 
@@ -59,11 +59,12 @@ Codex reads `AGENTS.md`; Hermes reads `~/.hermes/skills/<category>/<name>/`.
 AGENTS.md                     # agent-facing entry (Copilot/Codex)
 CORE.md                       # THE authoritative contract (read this)
 MANIFEST.md                   # installed-extension registry
-SKILL.md                      # Claude-Code/Hermes boot entry
+SKILL.md                      # Claude-Code boot entry
 core-skills/                  # curator-immune framework skills
 extensions/                   # plugins (each has plugin.yaml)
 extensions/README.md          # how to build a plugin
 memory/                       # semantic + profile + episodic stores
+learnings/                    # distilled how-to-work knowledge
 curator/                      # usage ledger, backup, archive, traces
 tools/validate_manifest.py    # stdlib-only validator
 research/                     # industry research + comparison

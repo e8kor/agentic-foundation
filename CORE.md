@@ -2,7 +2,7 @@
 name: foundation-core
 description: "Framework core: self-management (memory/profile/skills/curator) + open extension system. The seed every skill, tool, and plugin plugs into."
 version: 2.0.1
-author: Hermes Agent (ported)
+author: Agentic Foundation
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
@@ -16,7 +16,7 @@ metadata:
 
 This is a **framework core**, not a task skill. It defines the contract for an
 open, extensible skill ecosystem that the agent maintains across sessions — the
-self-improving nature of Hermes Agent, made portable and pluggable.
+self-improving nature of an agentic foundation, made portable and pluggable.
 
 It ships three things:
 1. **Core self-management** — memory, user profile, skills, and a safe curator.

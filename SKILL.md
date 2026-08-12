@@ -2,7 +2,7 @@
 name: foundation-core
 description: "Framework core: self-management + open extension system. Loads CORE.md (the authoritative spec). Use as the framework entrypoint."
 version: 2.0.0
-author: Hermes Agent (ported)
+author: Agentic Foundation
 license: MIT
 metadata:
   foundation:
