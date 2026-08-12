@@ -82,9 +82,11 @@ jobs:
 
       - name: Install spec-kit CLI (official source, not the PyPI stub)
         run: |
+          # ubuntu-latest doesn't ship uv; install it first
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
           uv tool install specify-cli --force \
             --from git+https://github.com/github/spec-kit.git
-          export PATH="$HOME/.local/bin:$PATH"
           specify version 2>&1 | grep -i "cli version" | head -1
 
       - name: Init a throwaway spec-kit project (Copilot integration)
