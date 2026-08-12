@@ -1,0 +1,322 @@
+[
+  {
+    "query": "agent skills framework",
+    "total": 2004,
+    "results": [
+      {
+        "full_name": "obra/superpowers",
+        "stars": 271206,
+        "description": "An agentic skills framework & software development methodology that works.",
+        "language": "Shell",
+        "url": "https://github.com/obra/superpowers",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "mukul975/Anthropic-Cybersecurity-Skills",
+        "stars": 27682,
+        "description": "817 structured cybersecurity skills for AI agents · Mapped to 6 frameworks: MITRE ATT&CK, NIST CSF 2.0, MITRE ATLAS, D3FEND, NIST AI RMF & MITRE F3 (Fight Fraud) · agentskills.io standard · Works with Claude Code, GitHub Copilot, Codex CLI, Cursor, G",
+        "language": "Python",
+        "url": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "TencentCloud/TencentDB-Agent-Memory",
+        "stars": 20479,
+        "description": "TencentDB Agent Memory is a team-level memory hub for AI Agents — turning conversations, docs, and code into four reusable memory assets (Chat Memory, Skill, LLM-Wiki, Code-Graph) that are governed, shared, and equipped across agents and frameworks.",
+        "language": "TypeScript",
+        "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "wanshuiyin/Auto-claude-code-research-in-sleep",
+        "stars": 14608,
+        "description": "ARIS ⚔️ (Auto-Research-In-Sleep) — Lightweight Markdown-only skills for autonomous ML research: cross-model review loops, idea discovery, and experiment automation. No framework, no lock-in — works with Claude Code, Codex, OpenClaw, or any LLM agent.",
+        "language": "Python",
+        "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "mcp-use/mcp-use",
+        "stars": 10483,
+        "description": "The fullstack MCP framework to develop MCP Apps for ChatGPT / Claude & MCP Servers for AI Agents.",
+        "language": "TypeScript",
+        "url": "https://github.com/mcp-use/mcp-use",
+        "updated": "2026-08-12"
+      }
+    ]
+  },
+  {
+    "query": "agent memory long-term LLM",
+    "total": 440,
+    "results": [
+      {
+        "full_name": "memvid/memvid",
+        "stars": 16213,
+        "description": "Memory layer for AI Agents. Replace complex RAG pipelines with a serverless, single-file memory layer. Give your agents instant retrieval and long-term memory.",
+        "language": "Rust",
+        "url": "https://github.com/memvid/memvid",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "morettt/my-neuro",
+        "stars": 1330,
+        "description": "This project lets you create your own AI desktop companion with customizable characters and voice conversations that respond in just 1 second. Features include long-term memory, visual recognition, voice cloning and LLM training. Compatible with vari",
+        "language": "Python",
+        "url": "https://github.com/morettt/my-neuro",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "Dataojitori/nocturne_memory",
+        "stars": 1313,
+        "description": "A lightweight, rollbackable, and visual Long-Term Memory Server for MCP Agents. Say goodbye to Vector RAG and amnesia. Empower your AI with persistent, graph-like structured memory across any model, session, or tool. Drop-in replacement for OpenClaw.",
+        "language": "Python",
+        "url": "https://github.com/Dataojitori/nocturne_memory",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "LycheeMem/LycheeMem",
+        "stars": 1158,
+        "description": "Lightweight Long-Term Memory for LLM Agents.",
+        "language": "Python",
+        "url": "https://github.com/LycheeMem/LycheeMem",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "IAAR-Shanghai/Awesome-AI-Memory",
+        "stars": 1154,
+        "description": "Awesome AI Memory | LLM Memory | A curated knowledge base on AI memory for LLMs and agents, covering long-term memory, reasoning, retrieval, and memory-native system design.  Awesome-AI-Memory 是一个 集中式、持续更新的 AI 记忆知识库，系统性整理了与 大模型记忆（LLM Memory）与智能体记忆（Ag",
+        "language": "Python",
+        "url": "https://github.com/IAAR-Shanghai/Awesome-AI-Memory",
+        "updated": "2026-08-12"
+      }
+    ]
+  },
+  {
+    "query": "AI agent plugins extension architecture",
+    "total": 3,
+    "results": [
+      {
+        "full_name": "fabioc-aloha/AlexAgent",
+        "stars": 1,
+        "description": "Alex Agent Plugin — Install AI cognitive architecture in VS Code without an extension. 84 skills, 7 agents, 22 instructions, MCP tools.",
+        "language": "PowerShell",
+        "url": "https://github.com/fabioc-aloha/AlexAgent",
+        "updated": "2026-05-15"
+      },
+      {
+        "full_name": "jakey-khan/research-assistant-agentic-ai",
+        "stars": 0,
+        "description": "#Agentic AI with  #Microservices-architecture, #Spring AI, #JS, #Google chrome extension,#plugin",
+        "language": "Java",
+        "url": "https://github.com/jakey-khan/research-assistant-agentic-ai",
+        "updated": "2026-04-28"
+      },
+      {
+        "full_name": "daporun/mcp-server-general",
+        "stars": 0,
+        "description": "General MCP Server is a protocol-compliant MCP server implementing the Model Context Protocol. It offers a JSON-configured MCP server for fast setup, with built-in handlers and a plugin-based architecture that makes customization and extension simple",
+        "language": "TypeScript",
+        "url": "https://github.com/daporun/mcp-server-general",
+        "updated": "2026-01-07"
+      }
+    ]
+  },
+  {
+    "query": "self-evolving agent skills",
+    "total": 225,
+    "results": [
+      {
+        "full_name": "zhayujie/CowAgent",
+        "stars": 46471,
+        "description": "Open-source super AI assistant & Agent Harness. Plans tasks, runs tools and skills, self-evolves with memory and knowledge. Multi-model, multi-channel. Lightweight, extensible, one-line install. (formerly chatgpt-on-wechat)",
+        "language": "Python",
+        "url": "https://github.com/zhayujie/CowAgent",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "volcengine/OpenViking",
+        "stars": 28281,
+        "description": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+        "language": "Python",
+        "url": "https://github.com/volcengine/OpenViking",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "lsdefine/GenericAgent",
+        "stars": 13753,
+        "description": "Self-evolving agent: grows skill tree from 3.3K-line seed, achieving full system control with 6x less token consumption",
+        "language": "Python",
+        "url": "https://github.com/lsdefine/GenericAgent",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "EverMind-AI/EverOS",
+        "stars": 11975,
+        "description": "One portable memory layer for every AI agent: local-first, Markdown-native, user-owned, and self-evolving across apps, tools, and workflows.",
+        "language": "Python",
+        "url": "https://github.com/EverMind-AI/EverOS",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "MemTensor/MemOS",
+        "stars": 10695,
+        "description": "Self-evolving memory OS for LLM & AI Agents: ultra-persistent memory, hybrid-retrieval, and cross-task skill reuse, with 35.24% token savings",
+        "language": "TypeScript",
+        "url": "https://github.com/MemTensor/MemOS",
+        "updated": "2026-08-12"
+      }
+    ]
+  },
+  {
+    "query": "AGENTS.md agent instructions standard",
+    "total": 8,
+    "results": [
+      {
+        "full_name": "anmoln7/agent-standard-oss",
+        "stars": 17,
+        "description": "For anyone whose AI coding agent (Claude Code, Codex, Cursor, Gemini) keeps following stale instructions: a small spec plus dependency-free bash tools that keep AGENTS.md / CLAUDE.md single-sourced and honest.",
+        "language": "Shell",
+        "url": "https://github.com/anmoln7/agent-standard-oss",
+        "updated": "2026-08-06"
+      },
+      {
+        "full_name": "api-evangelist/agents-md",
+        "stars": 1,
+        "description": "AGENTS.md is an open standard file format that provides context and instructions to AI coding agents working on software projects. Like a README for agents, an AGENTS.md file lives in the project repository and tells AI agents how to build, test, and",
+        "language": null,
+        "url": "https://github.com/api-evangelist/agents-md",
+        "updated": "2026-08-11"
+      },
+      {
+        "full_name": "perspace42/AGENTS_MD_GUIDE",
+        "stars": 1,
+        "description": "A standard set of instructions for Coding Agents. Ensuring that the output conforms to the written standard regardless of which agent is used. ",
+        "language": null,
+        "url": "https://github.com/perspace42/AGENTS_MD_GUIDE",
+        "updated": "2026-06-01"
+      },
+      {
+        "full_name": "forsonny/forsonny-king-mode",
+        "stars": 0,
+        "description": "Custom instruction for AI agents for standard results - CLAUDE.md, AGENTS.md",
+        "language": null,
+        "url": "https://github.com/forsonny/forsonny-king-mode",
+        "updated": "2025-12-22"
+      },
+      {
+        "full_name": "ChrisMckerracher/python-template",
+        "stars": 0,
+        "description": "Reusable Python project template (uv, 3.15+) with a built-in agent-instructions harness: cascading docs/ standards, AGENTS.md indexes, CI, ruff, pytest+coverage, and supply-chain hardening.",
+        "language": "Python",
+        "url": "https://github.com/ChrisMckerracher/python-template",
+        "updated": "2026-06-25"
+      }
+    ]
+  },
+  {
+    "query": "SKILL.md agent skills",
+    "total": 1492,
+    "results": [
+      {
+        "full_name": "microsoft/SkillOpt",
+        "stars": 15941,
+        "description": "SkillOpt is a text-space optimizer that trains reusable natural-language skills for frozen LLM agents through trajectory-driven edits, validation-gated updates, and deployable best_skill.md artifacts.",
+        "language": "Python",
+        "url": "https://github.com/microsoft/SkillOpt",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "bergside/awesome-design-skills",
+        "stars": 2313,
+        "description": "List of 67 awesome DESIGN.md and SKILL.md design skill files for agentic tools like Claude Design, Google Stitch, Codex, Cursor, and other AI tools",
+        "language": null,
+        "url": "https://github.com/bergside/awesome-design-skills",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "FrancyJGLisboa/agent-skill-creator",
+        "stars": 2226,
+        "description": "Turn any workflow into reusable AI agent skills that install on 17 platforms — Claude Code, Copilot, Cursor, Windsurf, Codex, Gemini, Kiro, and more. One SKILL.md, every platform.",
+        "language": "Python",
+        "url": "https://github.com/FrancyJGLisboa/agent-skill-creator",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "skalesapp/skales",
+        "stars": 1628,
+        "description": "Personal AI desktop agent for Windows, macOS, Linux, Android & iOS. Set a goal, it works on its own. Teams (pair two desktops, agents + humans), Agent2Agent, Workflows, Codework, multi-agent orgs, desktop + browser automation. 15+ AI providers, BYOK.",
+        "language": "TypeScript",
+        "url": "https://github.com/skalesapp/skales",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "dzcmemory-web/bazi-ziwei-skill",
+        "stars": 791,
+        "description": "AI 八字 + 紫微斗数排盘与综合印证 Skill：算法精准排盘（不靠 LLM 猜），三种分析模式，一键生成水墨风 HTML 命盘海报。兼容 Claude / Codex / Cursor / Workbuddy 等 SKILL.md Agent。",
+        "language": "TypeScript",
+        "url": "https://github.com/dzcmemory-web/bazi-ziwei-skill",
+        "updated": "2026-08-12"
+      }
+    ]
+  },
+  {
+    "query": "agentic memory vector",
+    "total": 1327,
+    "results": [
+      {
+        "full_name": "pingcap/tidb",
+        "stars": 40423,
+        "description": "TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, analytics, and vector search. No data silos. No noisy neighbors. No infrastructure ceiling.",
+        "language": "Go",
+        "url": "https://github.com/pingcap/tidb",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "neuron-core/neuron-ai",
+        "stars": 2050,
+        "description": "The Agentic Framework of the PHP ecosystem to build production-ready AI driven applications. Connect components (LLMs, Tools, vector DBs, memory) to agents that interact with your data and UI.",
+        "language": "PHP",
+        "url": "https://github.com/neuron-core/neuron-ai",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "matrixorigin/matrixone",
+        "stars": 1876,
+        "description": "AI-native HTAP database with Git-for-Data and built-in vector search, serving as the data and memory backbone for intelligent agents and applications.",
+        "language": "Go",
+        "url": "https://github.com/matrixorigin/matrixone",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "tickernelz/opencode-mem",
+        "stars": 1334,
+        "description": "OpenCode plugin that gives coding agents persistent memory using local vector database",
+        "language": "TypeScript",
+        "url": "https://github.com/tickernelz/opencode-mem",
+        "updated": "2026-08-12"
+      },
+      {
+        "full_name": "Dataojitori/nocturne_memory",
+        "stars": 1313,
+        "description": "A lightweight, rollbackable, and visual Long-Term Memory Server for MCP Agents. Say goodbye to Vector RAG and amnesia. Empower your AI with persistent, graph-like structured memory across any model, session, or tool. Drop-in replacement for OpenClaw.",
+        "language": "Python",
+        "url": "https://github.com/Dataojitori/nocturne_memory",
+        "updated": "2026-08-12"
+      }
+    ]
+  },
+  {
+    "query": "LLM agent profile user preferences memory",
+    "total": 1,
+    "results": [
+      {
+        "full_name": "NicolasFlorez130/To-Do_Agent",
+        "stars": 0,
+        "description": "A TypeScript-based LangGraph chatbot with long-term memory, designed to intelligently manage your To-Do lists, user profile, and personalized preferences.",
+        "language": "TypeScript",
+        "url": "https://github.com/NicolasFlorez130/To-Do_Agent",
+        "updated": "2026-04-24"
+      }
+    ]
+  }
+]

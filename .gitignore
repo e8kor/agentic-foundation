@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Curator runtime state (regenerated; keep backups out of git or commit them? see below)
+# curator/.usage.json      # usage ledger — regenerate; but committing gives history. Keep uncommitted by default.
+curator/.backup/
+# curator/archived/        # archived items — decide: commit to preserve, or ignore. Default: commit for safety.
+
+# Local ephemeral
+*.log
+.DS_Store
+
+# Note: memory/memory.md and memory/profile.md are intentionally TRACKED
+# (they are the user's durable stores). Episodic logs are append-only history:
+memory/episodic/*.md
+!memory/episodic/README.md

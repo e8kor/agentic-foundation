@@ -1,0 +1,302 @@
+[
+  {
+    "query": "AI agent skill curation framework best practices",
+    "results": [
+      {
+        "title": "k-r33/best-practice-for-skill-system",
+        "url": "https://github.com/k-r33/best-practice-for-skill-system",
+        "desc": "# k-r33/best-practice-for-skill-system\n\nHow to organize agent skills as a coherent system — stop trigger conflicts and know when to build a new skill. The systems-engineering layer Anthropic's single-skill docs don't cover.\n\n- Stars: 0\n- Forks: 0\n- Watchers: 0\n- Open issues: 0\n- License: MIT License\n- Homepage: https://k-r33.github.io/best-practice-for-skill-system/\n- Default branch: main\n- Create"
+      },
+      {
+        "title": "Build skills | ChatGPT Learn",
+        "url": "https://developers.openai.com/codex/skills",
+        "desc": "# Build skills\n\nUse agent skills to extend Codex with task-specific capabilities. A skill packages instructions, resources, and optional scripts so Codex can follow a workflow reliably. Skills build on the open agent skills standard.\n\nSkills are the authoring format for reusable workflows. Plugins distribute reusable skills and connectors to ChatGPT Work on the web and to ChatGPT Work and Codex in"
+      },
+      {
+        "title": "Equipping agents for the real world with Agent Skills \\ Anthropic",
+        "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+        "desc": "Equipping agents for the real world with Agent Skills \\ Anthropic\n\n# Equipping agents for the real world with Agent Skills\n\nPublished Oct 16, 2025\n\nClaude is powerful, but real work requires procedural knowledge and organizational context. Introducing Agent Skills, a new way to build specialized agents using files and folders.\n\nUpdate: We've published Agent Skills as an open standard for cross-pla"
+      },
+      {
+        "title": "Building skills for AI agents: pitfalls and best practices - Red Hat Emerging Technologies",
+        "url": "https://next.redhat.com/2026/07/28/building-skills-for-ai-agents-pitfalls-and-best-practices/",
+        "desc": "Building skills for AI agents: pitfalls and best practices - Red Hat Emerging Technologies\n\n# Building skills for AI agents: pitfalls and best practices for skill development\n\nby\n\n| Jul 28, 2026 | AI\n\n### As AI workflows and agents become more capable, the skills they rely on matter more than ever.\n\nMost teams start building AI agent skills organically—a script here, a prompt there—and that’s a na"
+      },
+      {
+        "title": "laguagu/agents-best-practices",
+        "url": "https://github.com/laguagu/agents-best-practices",
+        "desc": "# laguagu/agents-best-practices\n\n.agents-first best practices for AI agent skills — templates, guides, and auditing tools for Claude Code, Codex, Gemini CLI\n\n- Stars: 2\n- Forks: 1\n- Watchers: 2\n- Open issues: 0\n- License: Apache License 2.0\n- Default branch: main\n- Created: 2026-04-11T06:29:04Z\n\n## Top Contributors\n\n- laguagu (34 contributions)\n\n---\n\n## README\n\n# Agent Skills Best Practices 🤖\n\n> V"
+      }
+    ]
+  },
+  {
+    "query": "agent memory architecture episodic semantic procedural research",
+    "results": [
+      {
+        "title": "Graph-based Agent Memory: Taxonomy, Techniques, and Applications",
+        "url": "https://arxiv.org/html/2602.05665",
+        "desc": "# Graph-based Agent Memory: Taxonomy, Techniques, and Applications\n\nOpen MIND. Published: 2026-02-05. 0 citations.\n\n## Authors\n\n- Chang Yang: h-index 0; 0 citations\n- Chuang Zhou: h-index 0; 0 citations\n- Yilin Xiao: h-index 0; 0 citations\n- Su Dong: h-index 0; 0 citations\n- Zhuang, Luyao\n- Yujing Zhang: h-index 0; 0 citations\n- Zhu Wang: h-index 0; 0 citations\n- Zijin Hong: h-index 6; 84 citation"
+      },
+      {
+        "title": "Are We Ready For An Agent-Native Memory System?",
+        "url": "https://arxiv.org/html/2606.24775",
+        "desc": "# Are We Ready For An Agent-Native Memory System?\n\narXiv (Cornell University). Published: 2026-06-23. Preprint. 0 citations.\n\n## Authors\n\n- Wei Zhou: h-index 0; 0 citations\n- X J Zhou: h-index 0; 0 citations\n- Shaokun Han: h-index 0; 0 citations\n- Hongming Xu: h-index 0; 0 citations\n- Guoliang Li: h-index 0; 0 citations\n- Zhiyu Li: h-index 0; 0 citations\n- Feiyu Xiong: h-index 0; 0 citations\n- Fan"
+      },
+      {
+        "title": "Synapse: Empowering LLM Agents with Episodic-Semantic Memory via Spreading Activation - ACL Anthology",
+        "url": "https://aclanthology.org/2026.findings-acl.1108/",
+        "desc": "Synapse: Empowering LLM Agents with Episodic-Semantic Memory via Spreading Activation - ACL Anthology\n\n---\n\n##### Abstract\n\nWhile Large Language Models (LLMs) excel at generalized reasoning, standard retrieval-augmented approaches fail to address the disconnected nature of long-term agentic memory. To bridge this gap, we introduce Synapse (Synergistic Associative Processing Semantic Encoding), a u"
+      },
+      {
+        "title": "Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents | Robotics Research | Robotics Center of Silicon Valley",
+        "url": "https://www.roboticscenter.ai/research/papers/episodic-semantic-memory-architecture-for-long-horizon-scientific-agents-2605",
+        "desc": "Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents | Robotics Research | Robotics Center of Silicon Valley\n\n# Episodic-Semantic Memory Architecture for Long-Horizon Scientific Agents\n\n## Abstract\n\nAs Large Language Models (LLMs) evolve into persistent scientific collaborators, context window saturation has emerged as a critical bottleneck. Scientific workflows involving itera"
+      },
+      {
+        "title": "MAGMA: A Multi-Graph based Agentic Memory Architecture for AI Agents - ACL Anthology",
+        "url": "https://aclanthology.org/2026.acl-long.1709/",
+        "desc": "MAGMA: A Multi-Graph based Agentic Memory Architecture for AI Agents - ACL Anthology\n\nDongming Jiang, Yi Li, Guanpeng Li, Bingzhe Li\n\n---\n\n##### Abstract\n\nMemory-Augmented Generation (MAG) extends large language models with external memory to support long-context reasoning, but existing approaches largely rely on semantic similarity over monolithic memory stores, entangling temporal, causal, and e"
+      }
+    ]
+  },
+  {
+    "query": "LLM agent long-term memory retrieval best practices",
+    "results": [
+      {
+        "title": "AI Agent Memory Design Guide - Working, Long-Term, and Procedural Memory with Forgetting and Staleness Management | hidekazu-konishi.com",
+        "url": "https://hidekazu-konishi.com/entry/ai_agent_memory_design_guide.html",
+        "desc": "AI Agent Memory Design Guide - Working, Long-Term, and Procedural Memory with Forgetting and Staleness Management | hidekazu-konishi.com\n\n## AI Agent Memory Design Guide - Working, Long-Term, and Procedural Memory with Forgetting and Staleness Management\n\nFirst Published: 2026-06-11 Last Updated: 2026-07-26\n\n### 1. Introduction\n\nWhen an AI agent behaves unreliably in production, the symptom is usu"
+      },
+      {
+        "title": "https://redis.io/blog/ai-agent-memory-vs-retrieval/",
+        "url": "https://redis.io/blog/ai-agent-memory-vs-retrieval/",
+        "desc": "# Retrieval vs. memory in AI agents: why context layers need both\n\n**Tagline:** News & Media | **Authors:** Jim Allen Wallace | **Categories:** Tech DE | **Published:** 2026-06-17 | **Updated:** 2026-06-17\n\nA returning user asks your agent why their bill doubled this month. The agent greets them by name, pulls up last week's billing dispute, and references the workaround your team suggested. Then "
+      },
+      {
+        "title": "Long-Term Memory for AI Agents — The AI Database Blog",
+        "url": "https://theaidatabaseblog.com/learn/long-term-memory-for-ai-agents/",
+        "desc": "Long-Term Memory for AI Agents — The AI Database Blog\n\n# Long-Term Memory for AI Agents\n\n June 4, 2026 · Updated June 15, 2026 · 18 min read \n\nLong-term memory for AI agents is the system that lets an agent preserve useful knowledge beyond a single conversation or task. Because large language model calls are usually stateless on their own, the agent needs an external memory layer that can store fa"
+      },
+      {
+        "title": "https://redis.io/blog/semantic-memory-search-ai-agents/",
+        "url": "https://redis.io/blog/semantic-memory-search-ai-agents/",
+        "desc": "# https://redis.io/blog/semantic-memory-search-ai-agents/\n\nPublished: 2026-08-04T00:00:00Z\nSource: redis.com (redis.io)\nLanguage: en\n\n## Story\n\n# Semantic memory search for AI agents\n\n**Tagline:** News & Media | **Authors:** Jeff Mills | **Categories:** Tech DE | **Published:** 2026-08-04 | **Updated:** 2026-08-05\n\nYour [AI agent](https://redis.io/blog/what-is-an-ai-agent/) handles a long onboardi"
+      },
+      {
+        "title": "agentic-memories",
+        "url": "https://learn.microsoft.com/en-us/azure/cosmos-db/gen-ai/agentic-memories",
+        "desc": "---\nlayout: Conceptual\ntitle: Agent Memory in Azure Cosmos DB for NoSQL - Azure Cosmos DB for NoSQL | Microsoft Learn\ncanonicalUrl: https://learn.microsoft.com/en-us/azure/cosmos-db/gen-ai/agentic-memories\nuhfHeaderId: MSDocsHeader-NoSQL\npermissioned-type: public\nrecommendations: true\nrecommendation_types:\n- Training\n- Certification\nbreadcrumb_path: ../../breadcrumb/azure-nosql/toc.json\nfeedback_s"
+      }
+    ]
+  },
+  {
+    "query": "Claude Agent Skills vs MCP servers difference",
+    "results": [
+      {
+        "title": "Skills vs. other Claude Code features · Introduction to agent skills · Claude Academy",
+        "url": "https://academy.claude.com/courses/introduction-to-agent-skills/skills-vs-other-claude-code-features",
+        "desc": "Skills vs. other Claude Code features · Introduction to agent skills · Claude AcademyClaude Academy\n\nLesson 4 of 6 · Introduction to agent skillsSkills vs. other Claude Code features\n\nSign in to save your progressYou can keep reading without an account, but completed lessons won't be saved.\n\nNot now\n\n## Skills vs. other Claude Code features\n\nSkills vs. other Claude Code features · 3 min\n\nClaude Co"
+      },
+      {
+        "title": "MCP vs Agent Skills: What's the Difference and When to Use Each | Agent Shelf",
+        "url": "https://www.agentshelf.dev/blog/mcp-vs-agent-skills",
+        "desc": "MCP vs Agent Skills: What's the Difference and When to Use Each | Agent Shelf\n\n## Two standards, different problems\n\nIf you work with AI coding tools, you've probably encountered both MCP(Model Context Protocol) and Agent Skills. They're often mentioned together, and many tools support both. But they solve fundamentally different problems, and understanding the distinction helps you choose the rig"
+      },
+      {
+        "title": "Claude Skills vs MCP Servers:\nWhat’s the Difference and When to Use Each | AgenticSkills",
+        "url": "https://agenticskills.io/learn/skills-vs-mcp-servers",
+        "desc": "Claude Skills vs MCP Servers: What’s the Difference and When to Use Each | AgenticSkills\n\nIndex live · v1.3.0 · JUN 7 2026\n\n181+ skills indexed200+ MCP servers18+ platforms tracked\n\n[ ⌘K ] search\n\nComparison · Article\n\n# Claude Skills vs MCP Servers: What’s the Difference and When to Use Each\n\nLearn the key differences between Claude Skills and MCP Servers — when to use skills (knowledge), when to"
+      },
+      {
+        "title": "Claude Skills vs MCP: When Builders Should Use Each | The Spawn",
+        "url": "https://thespawn.io/learn/claude-skills-vs-mcp",
+        "desc": "Claude Skills vs MCP: When Builders Should Use Each | The Spawn\n\nClaude Skills and MCP solve different failures. Repeated procedure belongs in a Skill: the same checklist, review order, report shape, or house rule keeps getting pasted into chat. Missing reach belongs behind MCP: the assistant needs a real connection to a database, API, SaaS workspace, local app, file service, or public agent endpo"
+      },
+      {
+        "title": "Claude Skills vs MCP: Which to Pick in 2026",
+        "url": "https://www.layer3labs.io/guides/claude-skills-vs-mcp",
+        "desc": "Claude Skills vs MCP: Which to Pick in 2026\n\nReviewed by Jonathan West· Updated Jul 2, 2026\n\n# Claude Skills vs MCP: Which One Should Your Business Use in 2026?\n\nA plain-English decision guide for non-technical buyers picking between packaged capabilities and live tool servers.\n\nReviewed by Jonathan West· Updated Jul 2, 2026\n\nThe Claude Skills vs MCP question is the first real fork in the road for"
+      }
+    ]
+  },
+  {
+    "query": "AGENTS.md specification agents.md standard",
+    "results": [
+      {
+        "title": "AGENTS.md",
+        "url": "https://agents.md/",
+        "desc": "AGENTS.md\n\n## Why AGENTS.md?\n\nREADME.md files are for humans: quick starts, project descriptions, and contribution guidelines.\n\nAGENTS.md complements this by containing the extra, sometimes detailed context coding agents need: build steps, tests, and conventions that might clutter a README or aren’t relevant to human contributors.\n\nWe intentionally kept it separate to:\n\nGive agents a clear, predic"
+      },
+      {
+        "title": "agentsmd/agents.md",
+        "url": "https://github.com/agentsmd/agents.md",
+        "desc": "# agentsmd/agents.md\n\nAGENTS.md — a simple, open format for guiding coding agents\n\n- Stars: 23555\n- Forks: 1772\n- Watchers: 23555\n- Open issues: 164\n- License: MIT License\n- Homepage: https://agents.md\n- Default branch: main\n- Created: 2025-08-19T17:22:54Z\n\n## Languages\n\n- CSS\n- JavaScript\n- TypeScript\n\n## Top Contributors\n\n- romainhuet (12 contributions)\n- dwjoss (2 contributions)\n- radu-mocanu ("
+      },
+      {
+        "title": "AGENTS.md | Atlan Documentation",
+        "url": "https://docs.atlan.com/agents/concepts/agents-md",
+        "desc": "AGENTS.md | Atlan Documentation\n\nOn this page\n\n## What is AGENTS.md?​\n\nAGENTS.md is a plain Markdown file at the root of a repository that AI coding agents read into context before they work. It's not a config file. There is no schema, no validation, and no required fields. The spec is maintained at agents.md and the supporting community lives at github.com/agentsmd/agents.md.\n\nThe standard is pre"
+      },
+      {
+        "title": "AGENTS.md Specification | agentsmd/agents.md | DeepWiki",
+        "url": "https://deepwiki.com/agentsmd/agents.md/7-agents.md-specification",
+        "desc": "AGENTS.md Specification | agentsmd/agents.md | DeepWiki\n\nLoading...\n\nIndex your code with Devin\n\nIndex your code with\n\nDevin\n\nEdit WikiShare\n\nLoading...\n\nLast indexed: 24 April 2026 (d1ac7f)\n\nMenu\n\n# AGENTS.md Specification\n\nRelevant source files\n\nThis document describes the AGENTS.md file format specification that AI coding agents use to understand project context, conventions, and instructions. "
+      },
+      {
+        "title": "AGENTS.md Complete Guide 2026: Spec, Tools, Examples",
+        "url": "https://codersera.com/blog/agents-md-complete-guide-2026/",
+        "desc": "AGENTS.md Complete Guide 2026: Spec, Tools, Examples\n\nQuick answer. AGENTS.md is an open, plain-Markdown file in your repo root that tells AI coding agents how to build, test, and contribute to the project. It is read natively by Codex, Cursor, Copilot, Gemini CLI, Aider, Windsurf, Zed, Factory, Jules, and over 20 other tools, is stewarded by the Linux Foundation's Agentic AI Foundation, and has b"
+      }
+    ]
+  },
+  {
+    "query": "AI agent observability tracing evaluation governance best practices",
+    "results": [
+      {
+        "title": "Agent Factory: Top 5 agent observability best practices for reliable AI | Microsoft Azure Blog",
+        "url": "https://azure.microsoft.com/en-us/blog/agent-factory-top-5-agent-observability-best-practices-for-reliable-ai/",
+        "desc": "Agent Factory: Top 5 agent observability best practices for reliable AI | Microsoft Azure Blog\n\nAugust 27, 2025 7 min read\n\n# Agent Factory: Top 5 agent observability best practices for reliable AI\n\nBy\n\n, Corporate Vice President, Microsoft Foundry\n\nThis blog post is the third out of a six-part blog series called Agent Factory which will share best practices, design patterns, and tools to help gui"
+      },
+      {
+        "title": "observability-ai-systems",
+        "url": "https://learn.microsoft.com/en-us/security/zero-trust/sfi/observability-ai-systems",
+        "desc": "---\nlayout: Conceptual\ntitle: Observability for Generative AI and agentic AI systems | Microsoft Learn\ncanonicalUrl: https://learn.microsoft.com/en-us/security/zero-trust/sfi/observability-ai-systems\nuhfHeaderId: MSDocsHeader-Security\nbreadcrumb_path: /security/breadcrumb/toc.json\nfeedback_system: Standard\nfeedback_help_link_type: ''\nms.author: raynew\nauthor: rayne-wiselman\ndescription: Learn how "
+      },
+      {
+        "title": "How to Debug & Evaluate AI Agents with Observability — LangChain Guide",
+        "url": "https://www.langchain.com/blog/agent-observability-powers-agent-evaluation",
+        "desc": "How to Debug & Evaluate AI Agents with Observability — LangChain Guide\n\nConceptual Guide\n\n# Agent observability powers agent evaluation\n\nHarrison Chase\n\n16\n\nmin\n\nGo back to blog\n\nCreate agents\n\nShare\n\n## Key Takeaways\n\nYou can't build reliable agents without understanding how they reason, and you can't validate improvements without systematic evaluation. This article explains the primitives for ag"
+      },
+      {
+        "title": "Tracing and Observability for Agent Systems | AgentEngineering.org",
+        "url": "https://agentengineering.org/articles/tracing-and-observability-for-agent-systems/",
+        "desc": "Tracing and Observability for Agent Systems | AgentEngineering.org\n\nAgent systems become hard to reason about as soon as they stop being single responses.\n\nOnce a system can plan, call tools, retry, hand work across components, pause for approval, and recover from intermediate failures, the final answer stops telling the whole story.\n\nYou may see a correct outcome and still have no idea whether th"
+      },
+      {
+        "title": "AI Agent Observability: Tracing, Testing, and Improving Agents",
+        "url": "https://www.langchain.com/resources/agent-observability",
+        "desc": "AI Agent Observability: Tracing, Testing, and Improving Agents\n\n# AI Agent Observability: Tracing, Testing, and Improving Agents\n\nApril 7, 2026\n\nCreate agents\n\nShare\n\nKey Takeaways\n\n- Most agent debugging workflows still assume engineers will sift through logs to find root causes, but production trace volume makes this approach unsustainable.\n- The fastest teams turn observations into action: they"
+      }
+    ]
+  },
+  {
+    "query": "self-improving AI agent skills evolution",
+    "results": [
+      {
+        "title": "EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification",
+        "url": "https://arxiv.org/abs/2604.01687v1",
+        "desc": "EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification\n\narXiv is now an independent nonprofit! Learn more×\n\n# EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification\n\nHanrong Zhang1 Shicheng Fan111footnotemark: 1 Henry Peng Zou1 Yankai Chen2,3 Zhenting Wang2 Jiayu Zhou4 Chengze Li1 Wei-Chieh Huang1 Yifei Yao5 Kening Zheng1 Xue (Steve) Liu2,3 Xiaoxiao Li6 Philip S. Yu"
+      },
+      {
+        "title": "SkillOpt: Executive Strategy for Self-Evolving Agent Skills - Microsoft Research",
+        "url": "https://www.microsoft.com/en-us/research/publication/skillopt-executive-strategy-for-self-evolving-agent-skills/",
+        "desc": "SkillOpt: Executive Strategy for Self-Evolving Agent Skills - Microsoft Research\n\n# SkillOpt: Executive Strategy for Self-Evolving Agent Skills\n\n- Yifan Yang,\n- Ziyang Gong ,\n- Weiquan Huang ,\n- Qihao Yang ,\n- Ziwei Zhou ,\n- Zisu Huang ,\n- Yan Li ,\n- Xuemei Gao ,\n- Qi Dai,\n- Bei Liu,\n- Kai Qiu,\n- Yuqing Yang,\n- Dongdong Chen,\n- Xue-Ting Yang ,\n- Chong Luo\n\nMay 2026\n\narXiv\n\nAgent skills today are h"
+      },
+      {
+        "title": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+        "url": "https://arxiv.org/html/2606.08671",
+        "desc": "# SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History\n\narXiv (Cornell University). Published: 2026-06-07. Preprint. 0 citations.\n\n## Authors\n\n- Zhiwei Li: h-index 0; 0 citations\n- Yong Hu: h-index 0; 0 citations\n\n## Topics\n\n- Topic Modeling\n- Multimodal Machine Learning Applications\n- Language and cultural evolution\n\n---\n\n# SkillHone: A Harness for Continua"
+      },
+      {
+        "title": "OpenSkill: Open-World Self-Evolution for LLM Agents",
+        "url": "https://arxiv.org/html/2606.06741v1",
+        "desc": "OpenSkill: Open-World Self-Evolution for LLM Agents\n\narXiv is now an independent nonprofit! Learn more×\n\n1]Lehigh University 2]University of Illinois Chicago 3]University of British Columbia 4]Vector Institute 5]Salesforce AI Research 6]Massachusetts General Hospital and Harvard Medical School \\contribution[*]Equal contribution \\contribution[†]Corresponding author\n\n# OpenSkill: Open-World Self-Evo"
+      },
+      {
+        "title": "SkillOpt | Executive Strategy for Self-Evolving Agent Skills",
+        "url": "https://microsoft.github.io/SkillOpt/",
+        "desc": "SkillOpt | Executive Strategy for Self-Evolving Agent Skills\n\nText-space optimization for frozen agents\n\n# SkillOpt\n\nExecutive Strategy for Self-Evolving Agent Skills. SkillOpt treats a compact natural-language skill document as the trainable state of a frozen language agent, then learns that document through rollouts, reflection, bounded edits, and held-out validation gates.\n\nCore Idea Method Vie"
+      }
+    ]
+  },
+  {
+    "query": "AI agent plugin ecosystem architecture extension points",
+    "results": [
+      {
+        "title": "AI Agent Plugin and Extension Architecture | Zylos Research",
+        "url": "https://zylos.ai/research/2026-02-21-ai-agent-plugin-extension-architecture/",
+        "desc": "AI Agent Plugin and Extension Architecture | Zylos Research\n\n## Executive Summary\n\nAI agents have rapidly evolved from monolithic, purpose-built systems into composable platforms where capabilities are packaged as discrete, swappable units. The names differ — tools, skills, plugins, integrations, extensions — but the underlying idea is consistent: separate the agent's reasoning core from the domai"
+      },
+      {
+        "title": "https://agent-plugins.org/",
+        "url": "https://agent-plugins.org/",
+        "desc": "---\ntitle: Agent Plugins\ndescription: A portable package format for reusable components that extend AI agents.\n---\n\n# Agent Plugins\n\nAgent Plugins is an open, vendor-neutral standard for packaging reusable components into portable plugins. Its version 1.0.0 specification defines a shared format for [Agent Skills](https://agentskills.io/specification) and [MCP servers](https://modelcontextprotocol."
+      },
+      {
+        "title": "spec/1.0.0.md",
+        "url": "https://github.com/agentplugins/agent-plugins-spec/blob/main/spec/1.0.0.md",
+        "desc": "# spec/1.0.0.md\n\n- Branch: main\n- Repository: agentplugins/agent-plugins-spec\n\n---\n\n# Agent Plugins Specification\n\n**Spec Version: 1.0.0**\n\n**Status: Published**\n\nThis document defines the canonical Agent Plugins Specification v1.0.0 for packaging reusable components that extend AI agents into distributable plugins.\n\n## Table of contents\n\n1. [Status and version](#1-status-and-version)\n2. [Conforma"
+      },
+      {
+        "title": "Plugin architecture – Plugins | OpenAI Developers",
+        "url": "https://developers.openai.com/plugins/concepts/plugins",
+        "desc": "Plugin architecture – Plugins | OpenAI Developers\n\nFor the complete documentation index, see llms.txt. Markdown versions of documentation pages are available by appending`.md` to the page URL.\n\n### Suggested\n\ntoolscomponentsstateauth\n\nPlugins Workspace Agents Commerce Ads\n\n### Core concepts\n\n### Plan\n\n- Brainstorm use cases\n- Define tools\n\n### Build\n\n### Test and publish\n\n- Connect and test your p"
+      },
+      {
+        "title": "Extension Boundaries | Agently Docs",
+        "url": "https://agently.tech/docs/en/architecture/extension-boundaries.html",
+        "desc": "Extension Boundaries | Agently Docs\n\n# Extension Boundaries ​\n\n> Languages: English · 中文\n\nAgently separates stable framework contracts from default implementations and developer-facing shortcuts.\n\nUse this rule when designing or extending a capability:\n\n```\nCore contract\n  -> plugin/provider implementation\n  -> built-in capability Action\n  -> Agent Component or enable_* syntax sugar\n  -> business "
+      }
+    ]
+  },
+  {
+    "query": "knowledge management agent profile persona user preferences",
+    "results": [
+      {
+        "title": "User Profiles | Reflexio Docs",
+        "url": "https://www.reflexio.ai/docs/concepts/user-profiles",
+        "desc": "User Profiles | Reflexio Docs\n\nMenu\n\nCopy as Markdown\n\n# User Profiles\n\nProfiles are durable facts about a user and their environment. They help an agent personalize future responses without replaying the full interaction history.\n\nExamples include preferences, goals, constraints, role information, data conventions, and stable workflow context. Behavioral instructions for the agent belong in playb"
+      },
+      {
+        "title": "user-preference-memory-strategy.html",
+        "url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/user-preference-memory-strategy.html",
+        "desc": "\n\n# User preference memory strategy\n \n\nThe `UserPreferenceMemoryStrategy` is designed to automatically identify and extract user preferences, choices, and styles from conversational data. This lets your agent to learn from interactions and builds a persistent, dynamic profile of each user over time.\n\n **Steps in the strategy** \n\nThe user preference strategy includes the following steps:\n+ **Extrac"
+      },
+      {
+        "title": "Memory and personalization",
+        "url": "https://docs.glean.com/user-guide/assistant/memory-personalization",
+        "desc": "Memory and personalization\n\nOn this page\n\nMemory is a persistent, privacy-safe continuity layer that enables Glean to remember your preferences, work context, and ongoing projects. Memory helps Glean provide more relevant, personalized responses without requiring you to repeat information across sessions.\n\nWriting profile temporarily removed\n\nThe Writing profile section in Settings → Personalizati"
+      },
+      {
+        "title": "Knowledge – olllo",
+        "url": "https://docs.olllo.ai/tools/knowledge",
+        "desc": "Knowledge – olllo\n\nSkip to Content\n\nToolsKnowledge\n\nCopy page\n\n# Knowledge\n\nKnowledge is your AI personalization profile in olllo. It captures who you are, how you work, and how you want AI to help you. Every AI interaction — from accomplishment capture to weekly reflections — references your Knowledge to provide contextually relevant, personalized responses.\n\n## Accessing Knowledge\n\nClick “Knowle"
+      },
+      {
+        "title": "agent-personalization",
+        "url": "https://learn.hex.tech/docs/agent-management/agent-personalization",
+        "desc": "---\nimage: https://learn.hex.tech/img/hex-learn-social.png\ntitle: Agent personalization | Learn | Hex Technologies\ndescription: How Hex user memory works, what it stores, and how to control it in Settings.\n---\n\n \n\n[Skip to main content](#%5F%5Fdocusaurus%5FskipToContent%5Ffallback)\n\nOn this page\n\nPersonalize how the Hex agent responds with a profile built from how you work.\n\ninfo\n\n* Users need an "
+      }
+    ]
+  },
+  {
+    "query": "Anthropic agent skills framework SKILL.md specification",
+    "results": [
+      {
+        "title": "anthropics/skills",
+        "url": "https://github.com/anthropics/skills/",
+        "desc": "# anthropics/skills\n\nPublic repository for Agent Skills\n\n- Stars: 168503\n- Forks: 20073\n- Watchers: 168503\n- Open issues: 1079\n- Default branch: main\n- Created: 2025-09-22T15:53:31Z\n\n## Languages\n\n- HTML\n- JavaScript\n- Python\n- Shell\n\n## Topics\n\n- agent-skills\n\n## Top Contributors\n\n- rlancemartin (14 contributions)\n- klazuka (13 contributions)\n- ericharmeling (3 contributions)\n- quuu (2 contributi"
+      },
+      {
+        "title": "Equipping agents for the real world with Agent Skills \\ Anthropic",
+        "url": "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+        "desc": "Equipping agents for the real world with Agent Skills \\ Anthropic\n\n# Equipping agents for the real world with Agent Skills\n\nPublished Oct 16, 2025\n\nClaude is powerful, but real work requires procedural knowledge and organizational context. Introducing Agent Skills, a new way to build specialized agents using files and folders.\n\nUpdate: We've published Agent Skills as an open standard for cross-pla"
+      },
+      {
+        "title": "skills.md",
+        "url": "https://code.claude.com/docs/en/agent-sdk/skills.md",
+        "desc": "> ## Documentation Index\n> Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt\n> Use this file to discover all available pages before exploring further.\n\n# Agent Skills in the SDK\n\n> Extend Claude with specialized capabilities using Agent Skills in the Claude Agent SDK\n\n## Overview\n\nAgent Skills extend Claude with specialized capabilities that Claude autonomously invok"
+      },
+      {
+        "title": "docs/specification.mdx",
+        "url": "https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx",
+        "desc": "# docs/specification.mdx\n\n- Branch: main\n- Repository: agentskills/agentskills\n\n---\n\n---\ntitle: \"Specification\"\ndescription: \"The complete format specification for Agent Skills.\"\n---\n\n## Directory structure\n\nA skill is a directory containing, at minimum, a `SKILL.md` file:\n\n```\nskill-name/\n├── SKILL.md          # Required: metadata + instructions\n├── scripts/          # Optional: executable code\n├"
+      },
+      {
+        "title": "Introducing Agent Skills | Claude by Anthropic",
+        "url": "http://anthropic.com/news/skills",
+        "desc": "Introducing Agent Skills | Claude by Anthropic\n\nExplore here\n\n# Introducing Agent Skills\n\nCategory\n\nProduct\n\nDate\n\nOctober 16, 2025\n\nReading time\n\n5\n\nmin\n\nShare\n\nCopy link\n\nhttps://claude.com/blog/skills\n\nUpdate: We've added organization-wide management for skills, a directory featuring partner-built skills, and published Agent Skills as an open standard for cross-platform portability. (December 1"
+      }
+    ]
+  }
+]
