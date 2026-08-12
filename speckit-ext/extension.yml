@@ -1,0 +1,55 @@
+# Spec-Kit Extension Manifest — Foundation
+# Spec Kit extension that exposes the Foundation skill framework's self-management
+# nature as namespaced commands (audit, add-extension, curate, memory).
+# Reference: github.com/github/spec-kit/blob/main/extensions/EXTENSION-API-REFERENCE.md
+
+schema_version: "1.0"
+
+extension:
+  id: "foundation"                     # pattern ^[a-z0-9-]+$
+  name: "Foundation Skill Framework"
+  version: "1.0.0"                     # strict semver X.Y.Z
+  description: "Expose Foundation's skills/memory/curator discipline as spec-kit commands"
+  author: "Eugene Korniichuk"
+  repository: "https://github.com/e8kor/hermes-foundation"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.1.0"
+  tools: []                            # no external tools required
+
+provides:
+  commands:
+    - name: "speckit.foundation.audit"
+      file: "commands/audit.md"
+      description: "Audit the Foundation framework for consistency"
+    - name: "speckit.foundation.add-extension"
+      file: "commands/add-extension.md"
+      description: "Scaffold a new Foundation extension/plugin"
+    - name: "speckit.foundation.memory"
+      file: "commands/memory.md"
+      description: "Record a durable memory fact or read the memory store"
+
+  config:
+    - name: "foundation-config.yml"
+      template: "foundation-config.template.yml"
+      description: "Foundation framework root and curator settings"
+      required: false
+
+hooks:
+  after_plan:
+    - command: "speckit.foundation.audit"
+      priority: 10
+      optional: true
+      prompt: "Audit the Foundation framework for consistency?"
+      description: "Check the framework stays consistent after planning"
+
+tags:
+  - "framework"
+  - "skills"
+  - "memory"
+  - "self-management"
+  - "curator"
+
+defaults:
+  framework_root: ".foundation"
