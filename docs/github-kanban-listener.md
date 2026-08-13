@@ -59,26 +59,34 @@ GitHub issue: comment + close
 6. **Cron** — `kanban-github-sync` (every 5m, no_agent, runs the sweep).
 7. **Dispatcher** — runs inside the gateway (already active); no standalone daemon needed.
 
-## To wire the REAL GitHub webhook (DONE — live via zrok)
+## To wire the REAL GitHub webhook (DONE — live via zrok systemd service)
 
-The webhook is exposed publicly via **zrok** and registered in the GitHub repo.
-Real GitHub issues now flow through automatically.
+The webhook is exposed publicly via **zrok** (managed as a user systemd service)
+and registered in the GitHub repo. Real GitHub issues flow through automatically
+and the tunnel survives reboots.
 
-- **Public URL:** `https://jq7u85t05vmu.shares.zrok.io/webhooks/github-issues-to-kanban`
+- **Public URL:** `https://0y5hvey9hyy0.shares.zrok.io/webhooks/github-issues-to-kanban`
 - **zrok binary:** `~/.local/bin/zrok2` (v2, installed from cached deb; not on PATH by default)
-- **zrok share process:** `zrok2 share public http://localhost:8644 --headless` (running in background)
+- **systemd service:** `zrok2-share.service` (user service, enabled + lingering)
+  - `systemctl --user status zrok2-share.service`
+  - `systemctl --user restart zrok2-share.service`
+  - Logs: `journalctl --user -u zrok2-share.service -f`
 - **GitHub webhook:** registered on `e8kor/agentic-foundation` (hook id `665198849`), events `issues`, HMAC secret from `hermes webhook list`
 
 **Verified live:** created real issue #9 → GitHub POSTed to the zrok URL → webhook created kanban task → dispatcher spawned `coder` → task completed → sync-back closed issue #9 with a comment. Full loop confirmed with real GitHub traffic.
 
-### To re-establish the tunnel after a reboot
+### Note: zrok URL changes on each restart
+
+The zrok public URL is **not stable** — it changes every time the share restarts
+(unless you reserve a share). After a restart, get the new URL from the service
+log and update the GitHub webhook:
 
 ```bash
-export PATH="$HOME/.local/bin:$PATH"
-zrok2 share public http://localhost:8644 --headless   # note the new URL it prints
-```
+# Get the new URL
+journalctl --user -u zrok2-share.service --no-pager | grep -oE '[a-z0-9]+\.shares\.zrok\.io' | tail -1
 
-Then update the GitHub webhook URL to the new zrok URL (the zrok URL changes each run unless you use a reserved share).
+# Update the GitHub webhook URL (via API or repo Settings → Webhooks)
+```
 
 ## Verify
 
