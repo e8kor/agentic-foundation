@@ -216,6 +216,13 @@ Follow CORE.md §12 curation + §12 memory lifecycle — you are the curator:
 - Plugin `policy:` blocks (in `plugin.yaml`) override curator defaults for that
   plugin's items — but hard rules (CORE.md §17) always win.
 
+### Vet a skill for security (CORE.md §19)
+- Run the risk-tier assessment (§19.1) and review checklist (§19.2) before
+  enabling any third-party or internal skill.
+- Record a `@digest sha256:<hash>` for content-hash attestation (§19.3).
+- **Separation of duties:** don't review your own skill.
+- Quarantine anything that fails review (per §17.3), never delete.
+
 ---
 
 ## 7. Improve / extend tooling (E6)

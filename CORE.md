@@ -1,7 +1,7 @@
 ---
 name: foundation-core
 description: "Framework core: self-management (memory/profile/skills/learnings) + open extension system. The seed every skill, tool, and plugin plugs into."
-version: 3.2.0
+version: 3.3.0
 author: Agentic Foundation
 license: MIT
 platforms: [linux, macos, windows]
@@ -33,6 +33,7 @@ The sections below form a single logical flow:
 8. **Quality** (§14–15) — authoring and evaluation.
 9. **Governance** (§16–17) — versioning and hard rules.
 10. **Verification** (§18) — how to confirm the framework is consistent.
+11. **Security & trust** (§19) — skill supply-chain vetting and attestation.
 
 ---
 
@@ -461,6 +462,17 @@ happens to have two steps is not two skills. Extract only when the crossing is
   user-correction that worked.
 - Before **consolidating** two skills, verify the umbrella against one example
   from each source; confirm the outcome; trace it.
+- **Enforced evaluation (adoption gate):** before a skill is promoted to
+  `core-skills/` or a plugin is enabled, require a minimal eval suite of
+  **3–5 representative queries** covering (a) should-trigger, (b)
+  should-not-trigger, and (c) an ambiguous edge case. Record the result in
+  `curator/.traces/`. This is the gate that turns "≥2 uses" from a convention
+  into a checkable requirement.
+- **Recall limit:** keep the number of simultaneously-active skills low. Each
+  skill's name+description competes for attention in the system prompt; beyond
+  ~8–12 active skills, recall degrades. When a role needs more, **bundle by
+  role** (a `policy` extension that activates a focused subset) rather than
+  loading everything. Stop adding skills when evaluation shows recall dropping.
 
 ---
 
@@ -516,3 +528,52 @@ happens to have two steps is not two skills. Extract only when the crossing is
   ```bash
   python3 tools/validate_manifest.py --root .
   ```
+
+---
+
+## 19. Security & trust (skill supply chain)
+
+**Purpose:** treat skills as an execution surface and vet them before adoption —
+the single most-cited concern in the ecosystem (OWASP AST02, enterprise guides).
+
+### 19.1 Risk-tier assessment (before adopting any skill)
+
+Evaluate every skill/plugin against these indicators before approval. **High**
+concerns require a full audit; **medium** require review:
+
+| Risk indicator | What to look for | Concern |
+|----------------|------------------|---------|
+| Code execution | bundled `*.py`/`*.sh`/`*.js` scripts | **High** — run with full env access |
+| Instruction manipulation | directives to ignore safety, hide actions, alter behavior conditionally | **High** — can bypass controls |
+| MCP references | `ServerName:tool_name` in instructions | **High** — extends access beyond the skill |
+| Network access | URLs, `fetch`/`curl`/`requests` | **High** — exfiltration vector |
+| Hardcoded credentials | API keys/tokens/passwords in files | **High** — secrets leak |
+| Filesystem scope | paths outside the skill dir, `../`, broad globs | **Medium** |
+| Tool invocations | bash/file ops the skill directs | **Medium** |
+
+### 19.2 Review checklist (before enabling a third-party or internal skill)
+
+1. Read all skill content (SKILL.md + referenced files + scripts).
+2. Verify script behavior matches the stated purpose (run in a sandbox).
+3. Check for adversarial instructions (ignore-safety, hide-actions, exfil).
+4. Search for network calls (`http`, `requests`, `curl`, `fetch`).
+5. Confirm no hardcoded credentials (use env vars / secret stores).
+6. List the tools/commands the skill invokes; consider combined risk.
+7. Confirm external URLs point to expected domains.
+8. Check for data-exfiltration patterns (read sensitive → send/encode out).
+
+**Separation of duties:** a skill author should not be their own reviewer.
+
+### 19.3 Integrity & attestation
+
+- **Content-hash binding:** record a `@digest sha256:<hash>` in the skill's
+  frontmatter (or `metadata`) covering `SKILL.md` + every declared resource.
+  Any post-publish tampering invalidates the digest.
+- **Provenance is the trust anchor:** `core` (bundled, immune), `user`
+  (pin-protected), `third-party` (archive-only, backup-first). Treat
+  `third-party` skills like unaudited dependencies — read before install.
+- **Trust state:** a skill is `unverified` until it passes §19.1–19.2; it may be
+  `attested` (reviewed + digest recorded) or `revoked` (digest invalidated).
+  Hosts may surface or enforce this.
+- **Never run an unverified skill** with elevated permissions. Quarantine
+  anything that fails review (per §17.3), never delete.

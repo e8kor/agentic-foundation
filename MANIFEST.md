@@ -1,8 +1,8 @@
 # Agentic Foundation Manifest
 
 - **Framework:** foundation
-- **Version:** 3.2.0
-- **min_core_version:** 3.2.0
+- **Version:** 3.3.0
+- **min_core_version:** 3.3.0
 - **Provenance of this file:** core
 
 ## Extension points (seams) — see CORE.md §8
@@ -36,6 +36,9 @@
 
 ## Changelog
 
+- **3.3.0** — Security & trust section added (CORE.md §19): risk-tier assessment,
+  review checklist, content-hash attestation, trust states. Enforced evaluation
+  gate + recall limit added to §15.
 - **3.2.0** — Added §1 Motivation: why the framework exists and what it is a
   foundation *for* (problem, idea, foundation-vs-skill, three commitments,
   design principles). Renumbered all sections to 1–18 and updated every
