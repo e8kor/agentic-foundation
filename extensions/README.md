@@ -50,7 +50,7 @@ in the environment. Non-zero exit → warn, never abort the framework.
 
 `plugin.yaml` may add a `policy:` block (e.g. `archive_after_days: 365`,
 `allow_archive: [agent]`). These override curator defaults for that plugin's
-items. If a policy contradicts a hard rule in CORE.md §14, the hard rule wins.
+items. If a policy contradicts a hard rule in CORE.md §16, the hard rule wins.
 
 ## Declaring an external system (MCP)
 

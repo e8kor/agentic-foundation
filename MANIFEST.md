@@ -1,11 +1,11 @@
-# Foundation Framework Manifest
+# Agentic Foundation Manifest
 
 - **Framework:** foundation
-- **Version:** 2.0.0
-- **min_core_version:** 2.0.0
+- **Version:** 3.0.0
+- **min_core_version:** 3.0.0
 - **Provenance of this file:** core
 
-## Extension points (seams)
+## Extension points (seams) — see CORE.md §7
 
 | Point | Contributes | Example |
 |-------|-------------|---------|
@@ -15,8 +15,9 @@
 | `hook`    | lifecycle callbacks              | lint on save |
 | `policy`  | curator / collection overrides   | archive thresholds |
 | `adapter` | bridge to other agent formats    | AGENTS.md exporter |
+| `mcp`     | declared MCP servers             | Postgres MCP server |
 
-## Hook events (ordered lifecycle)
+## Hook events (ordered lifecycle) — see CORE.md §9
 
 `on-bootstrap` → `on-load` → `on-save` → `on-curate` → `on-shutdown`
 
@@ -26,14 +27,24 @@
 |------|---------|-----------|------------------|---------|-----------|
 | `example-plugin` | 1.1.0 | `>=2.0.0` | skill, tool, hook, policy, mcp | true | third-party |
 
-## Core skills (`core-skills/`, provenance: core, curator-immune)
+## Core skills (`core-skills/`, provenance: core, curator-immune) — see CORE.md §10
 
 | Name | Version | Purpose |
 |------|---------|---------|
 | `foundation-operator` | 1.1.0 | Governance: add/update/remove extensions, audit consistency, curate skills, manage memory lifecycle, declare MCP, bump core versions. Keeps the framework itself consistent. |
+| `extract-learnings` | 1.0.0 | Extract work learnings at task/session end (What/How/Decisions/Gotchas/Repeat/Avoid/Resume) so the next agent starts ahead. |
 
 ## Changelog
 
+- **3.0.0** — Refactor to a clean, sequential spec (17 sections, logical flow:
+  identity → contract → structure → data → extensibility → lifecycle → quality →
+  governance → verification). Fixed broken numbering, consolidated hooks, added
+  `mcp` to the seams, aligned manifest + adapters.
+- **2.1.0** — Learnings store added: distilled how-to-work knowledge
+  (What/How/Decisions/Gotchas/Repeat/Avoid/Resume) captured at task/session end
+  via the new `extract-learnings` core skill, so the next agent starts ahead.
+  Loaded at session start. Five stores now: memory, profile, skills, episodic,
+  learnings.
 - **2.0.1** — No-software principle codified: `mcp` extension point added
   (declared external systems, not bundled); `allowed_tools` permission scoping;
   episodic memory store + memory lifecycle (provenance `@since`/`@retain`,

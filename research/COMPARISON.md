@@ -59,7 +59,7 @@ biggest axis of difference, and it's a deliberate tradeoff, not an accident.
 - Positions itself as a **context database**: one store for memory, knowledge
   (RAG), and skills, with retrieval.
 - **Lesson:** we split stores by *type* (semantic/episodic/profile/skills) but
-  have **no unified retrieval** — the "load on demand" policy in CORE.md §11 is
+  have **no unified retrieval** — the "load on demand" policy in CORE.md §6 is
   advisory, not a retrieval index. Their RAG/vector retrieval is the gap we
   deliberately deferred as "needs software." A future, optional `retrieval`
   provider would close it without violating no-software (it would be a *declared*
@@ -68,9 +68,9 @@ biggest axis of difference, and it's a deliberate tradeoff, not an accident.
 ### microsoft/SkillOpt (★16k) — the verification loop, made concrete
 - **"validation-gated updates"**: a skill is only adopted when a validator passes.
 - **Lesson:** this is exactly the **skill evaluation / verification loop** we
-  added in CORE.md §13. Ours is a convention ("≥2 uses, then verify"); theirs is
+  added in CORE.md §14. Ours is a convention ("≥2 uses, then verify"); theirs is
   an automated optimizer with a validation gate. Our approach is the 
-  dependency-free, conservative version of their idea. Confirms §13 is the right
+  dependency-free, conservative version of their idea. Confirms §14 is the right
   direction — and that a future `evaluator` hook/point would let us plug in
   real validation.
 
@@ -131,7 +131,7 @@ instructions**:
    distinct from both `memory/` (facts) and `profile/` (person). Tencent's
    taxonomy shows the value. Cheap to add as a 4th/5th store; no software.
 2. **Upgrade the verification loop** (SkillOpt / agent-skill-creator lesson) —
-   make §13 concrete: a `curator/eval/` dir holding one small **eval spec**
+   make §14 concrete: a `curator/eval/` dir holding one small **eval spec**
    (`inputs` + `expected`) per skill, so "verify" is reproducible rather than a
    hand-wave. Still plain files + the agent running them; no framework software.
 3. **A security gate** (agent-skill-creator lesson) — before a plugin/skill is

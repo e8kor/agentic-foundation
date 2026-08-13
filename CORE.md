@@ -1,160 +1,244 @@
 ---
 name: foundation-core
-description: "Framework core: self-management (memory/profile/skills/curator) + open extension system. The seed every skill, tool, and plugin plugs into."
-version: 2.0.1
+description: "Framework core: self-management (memory/profile/skills/learnings) + open extension system. The seed every skill, tool, and plugin plugs into."
+version: 3.0.0
 author: Agentic Foundation
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   foundation:
     manifest: MANIFEST.md
-    extension_points: [skill, memory, tool, hook, policy, adapter]
+    extension_points: [skill, memory, tool, hook, policy, adapter, mcp]
     provenance: core
 ---
 
-# Foundation — Skill Framework Core
+# Agentic Foundation — Framework Core
 
-This is a **framework core**, not a task skill. It defines the contract for an
-open, extensible skill ecosystem that the agent maintains across sessions — the
-self-improving nature of an agentic foundation, made portable and pluggable.
+**Purpose:** define the contract for an open, extensible skill ecosystem that an
+agent maintains across sessions — the self-improving nature of a coding agent,
+made portable, pluggable, and dependency-free.
 
-It ships three things:
-1. **Core self-management** — memory, user profile, skills, and a safe curator.
-2. **A directory convention** — one root everything lives under.
-3. **An extension system** — a manifest plus named extension points any skill,
-   tool, memory provider, or policy can plug into.
+This is a **framework core**, not a task skill. It is deliberately thin: the
+core provides structure and safety; everything else is an extension.
 
-The core is deliberately thin. Everything else is an extension.
+The sections below form a single logical flow:
 
----
-
-## 1. The core contract
-
-What the framework guarantees to every extension:
-- A stable directory root and naming conventions.
-- A manifest/discovery mechanism — the agent can always find what's installed.
-- A curator that maintains everything safely (backup → archive → pin, never delete).
-- A fixed set of named **extension points** where plugins hook in.
-- Semver versioning + a compatibility gate at load time.
+1. **Identity** (§1) — what this framework is.
+2. **Contract** (§2) — what the framework guarantees.
+3. **Structure** (§3) — where things live.
+4. **Data** (§4–6) — the stores and how they're loaded.
+5. **Extensibility** (§7–9) — the seams, schema, and lifecycle.
+6. **Lifecycle** (§10–12) — curation, memory, and evolution.
+7. **Quality** (§13–14) — authoring and evaluation.
+8. **Governance** (§15–16) — versioning and hard rules.
+9. **Verification** (§17) — how to confirm the framework is consistent.
 
 ---
 
-## 2. Directory tree (single convention root)
+## 1. Identity
+
+**Purpose:** state what Agentic Foundation is and is not.
+
+- It is a **portable, dependency-free framework** for self-managing agent state:
+  skills, memory, user profile, and learnings.
+- It runs on **plain files + instructions**, with no runtime daemon and no
+  software dependencies. The only tool is a Python-standard-library validator.
+- It is **agent-agnostic**: adapters (see §7 `adapter`) expose it to Copilot,
+  Claude Code, Codex, and others via their native formats (`AGENTS.md`,
+  `SKILL.md`, `extension.yml`).
+- It is **safe by default**: the curator backs up, archives (never deletes), and
+  honors provenance and pinning.
+
+---
+
+## 2. The core contract
+
+**Purpose:** define what every extension can rely on.
+
+The framework guarantees to every skill, plugin, and extension:
+
+1. **A stable root and naming conventions** — one directory tree (§3).
+2. **A discovery mechanism** — the manifest (§5) always reflects what's installed.
+3. **Named extension points** — fixed seams to plug into (§7).
+4. **Safe curation** — backup → archive → pin, never delete (§11).
+5. **Versioning + a compatibility gate** — semver and `core` ranges (§15).
+
+---
+
+## 3. Directory layout
+
+**Purpose:** specify the single convention root and what each part is for.
 
 ```
-<root>/                            # repo:  .foundation/
-                                   # global: ~/.foundation/
-  CORE.md                          # this document (aka SKILL.md when installed)
-  MANIFEST.md                      # framework registry (name, version, extension points)
+<root>/                            # repo: .foundation/   global: ~/.foundation/
+  CORE.md                          # this spec — the authoritative contract
+  MANIFEST.md                      # registry: what is installed and valid (§5)
+  SKILL.md                         # boot entry — loads CORE.md when installed as a skill
+  AGENTS.md                        # adapter for Copilot/Codex (§7)
   memory/
     memory.md                      # store 1 — durable environment facts
     profile.md                     # store 2 — who the user is
+    episodic/                      # store 3 — raw session history
+  learnings/                       # store 4 — distilled how-to-work knowledge
   core-skills/
-    <name>/SKILL.md                # bundled framework skills (provenance: core)
+    <name>/SKILL.md                # framework skills (provenance: core)
   extensions/
-    <plugin>/                      # one dir per extension/plugin
-      plugin.yaml                  # plugin manifest (schema in §6)
+    <plugin>/                      # one dir per extension
+      plugin.yaml                  # plugin manifest (§8)
       README.md
       skills/                      # SKILL.md procedures this plugin contributes
       memory/                      # memory facts this plugin contributes
       tools/                       # executable helpers this plugin contributes
-      hooks/                       # lifecycle hook scripts this plugin implements
+      hooks/                       # lifecycle hook scripts (§9)
   curator/
-    .usage.json                    # per-skill usage ledger
+    .usage.json                    # per-skill usage ledger (§11)
     .backup/                       # pre-curation snapshots (rollback source)
-    archived/                      # stale items moved here — never hard-deleted
+    .traces/                       # observability-as-convention (plain text)
+    archived/                      # stale items — never hard-deleted
+  tools/
+    validate_manifest.py           # stdlib-only validator (§17)
 ```
 
+**Naming rules:** every directory and file uses lowercase, hyphens, no spaces.
+Extension/skill names must match `^[a-z0-9-]+$`.
+
 ---
 
-## 3. Manifest — the registry (MANIFEST.md)
+## 4. The stores (data model)
 
-The registry the agent reads on bootstrap to know what exists and what is valid.
+**Purpose:** define the five durable stores, what each holds, and when it's loaded.
+These are the framework's memory; keeping them separate is a hard rule (§16.8).
+
+| # | Store | Path | Holds | Loaded when |
+|---|-------|------|-------|-------------|
+| 1 | Semantic memory | `memory/memory.md` | durable **environment facts** | on demand |
+| 2 | User profile | `memory/profile.md` | **who the user is** (role, voice, prefs) | every session |
+| 3 | Episodic log | `memory/episodic/YYYY-MM-DD.md` | raw **what happened** history | continuity requests |
+| 4 | Learnings | `learnings/YYYY-MM-DD.md` | distilled **how-to-work** knowledge | session start |
+| 5 | Skills | `core-skills/` + `extensions/` | reusable **procedures** | on demand (§13) |
+
+**One-line rule of thumb:**
+- **facts** → semantic memory
+- **who you are** → profile
+- **what happened** → episodic
+- **how to work efficiently** → learnings
+- **how to do a task** → skills
+
+### 4.1 Semantic memory
+Durable environment facts: tool quirks, gotchas, working approaches, stable
+conventions. **Save** on user preference/correction or a costly workaround.
+**Never save** task progress, PR numbers, SHAs, or anything stale in a week.
+Write as **declarative facts**, not imperatives ("The build uses uv" ✓ /
+"Always use uv" ✗). Respect the budget — prune/consolidate in one pass.
+
+### 4.2 User profile
+Identity + preferences. The most stable store: changes rarely, read every
+session, never subject to staleness — only explicit update or user correction.
+
+### 4.3 Episodic log
+Per-session history, append-only. Records what was attempted/worked/failed,
+decisions. Not injected every turn. Lifecycle in §12. A fact only becomes
+durable by being promoted into semantic memory.
+
+### 4.4 Learnings
+Distilled how-to-work knowledge captured via the `extract-learnings` core skill
+(§10). Loaded at session start to orient. Facts stay in memory; raw history in
+episodic; the actionable summary lives here.
+
+### 4.5 Skills
+Reusable procedures (SKILL.md). Lifecycle in §11, authoring in §13.
+
+---
+
+## 5. The manifest (MANIFEST.md)
+
+**Purpose:** be the authoritative registry of what is installed and valid.
 
 Declares:
-- Framework name, version, `min_core_version`.
-- The supported **extension points** (the seams in §4).
-- A table of installed extensions: name, version, `core` range they target,
-  which extension points they implement, `enabled` state, `provenance`.
+- Framework name and version.
+- The supported **extension points** (§7).
+- A table of installed extensions: name, version, `core` range, extension
+  points, `enabled` state, `provenance`.
+- The **core skills** (curator-immune) shipped in `core-skills/`.
+- A **changelog** of core versions.
 
+The agent reads the manifest on bootstrap to know what exists and what is valid.
+The manifest and `extensions/` must never drift apart (see §17).
+
+### 5.1 Provenance (who owns what)
 Provenance drives curator permissions:
+
 | provenance | curator may | example |
 |-----------|-------------|---------|
-| `core`     | nothing (bundled)         | framework's own skills |
-| `agent`    | fully curatable           | skills the agent created |
-| `user`     | archive-only, backup-first, pin-protected | the user's own skills |
-| `third-party` | archive-only, backup-first, pin-protected | installed plugins |
+| `core`       | nothing (bundled, immune)      | framework's own skills |
+| `agent`      | fully curatable                | skills the agent created |
+| `user`       | archive-only, backup-first, pin-protected | the user's own skills |
+| `third-party`| archive-only, backup-first, pin-protected | installed plugins |
 
 ---
 
-## 4. Extension points (the seams)
+## 6. Load policy (retrieval & routing)
 
-Named interfaces where plugins plug in. Adding a new point is a **minor** core
-bump (additive); removing/renaming one is **major** (breaking).
+**Purpose:** specify which store reaches the agent when, to keep context lean
+("the context window is a public good").
+
+| Store | Load |
+|-------|------|
+| Profile | **always** (stable, small) |
+| Semantic memory | **on demand** — when the task needs it |
+| Learnings (latest) | **at session start** — to orient |
+| Episodic log | **only** on continuity requests |
+| Skills | **lazy** — only the name+description pre-load; body loads when relevant |
+
+---
+
+## 7. Extension points (the seams)
+
+**Purpose:** define the fixed, named interfaces where plugins plug in.
+Adding a point is a **minor** core bump (additive); removing/renaming is
+**major** (breaking).
 
 | Point | What it contributes | Example |
 |-------|--------------------|---------|
 | `skill`   | new SKILL.md procedures                    | a `git-workflow` skill |
 | `memory`  | memory facts or a schema                   | account/credential facts |
 | `tool`    | executable helpers the agent can call      | a `release.py` script |
-| `hook`    | lifecycle callbacks (see below)            | run lint on skill save |
-| `policy`  | curator/collection policy overrides        | "never archive anything older than X" |
+| `hook`    | lifecycle callbacks (§9)                   | run lint on skill save |
+| `policy`  | curator/collection policy overrides        | "never archive older than X" |
 | `adapter` | bridge to another agent's format           | AGENTS.md exporter for Copilot/Codex |
 | `mcp`     | **declared** MCP servers (external systems) | a Postgres MCP server the agent may launch |
 
-**No-software principle:** `tool` and `mcp` are *declarations*, not the software
-itself. The framework never ships or installs an MCP server, vector index, or
-eval engine. A plugin *declares* how to reach an external system (command, args,
-env); the agent launches it with the tools already present. Anything that needs a
-new runtime dependency is the plugin author's choice, and stays out of the core.
-
-**Hook events** (the built-in lifecycle, ordered):
-- `on-bootstrap` — when the framework initializes.
-- `on-load`      — when a skill is invoked.
-- `on-save`      — after a memory/skill write.
-- `on-curate`    — before/after a curator transition.
-- `on-shutdown`  — optional teardown.
+**No-software principle:** `tool` and `mcp` are *declarations*, not software the
+framework ships or installs. A plugin *declares* how to reach an external system
+(command, args, env); the agent launches it with tools already present. Anything
+needing a new runtime dependency is the plugin author's choice and stays out of
+the core.
 
 ---
 
-## 5. Lifecycle & discovery
+## 8. Plugin manifest schema (plugin.yaml)
 
-1. **BOOTSTRAP** — load `CORE.md` + `MANIFEST.md`; enumerate `extensions/`.
-2. **VALIDATE** — check each `plugin.yaml` against the schema (§6) and the core
-   version gate. **Invalid or incompatible → quarantine** into `curator/archived/`
-   and report; never delete, never silently run.
-3. **REGISTER** — valid plugins enter the active registry; `enabled: false` are
-   present but dormant.
-4. **EXECUTE** — the agent uses core self-management plus contributed
-   skills/tools; hooks fire at their events.
-5. **CURATE** — the curator maintains everything per provenance (usage → stale →
-   archive; backup before every transition; pin to protect). Policy extensions may
-   override thresholds.
-6. **EVOLVE** — new skills/extensions are added via the self-management lifecycle
-   below; the manifest is updated on every add/remove/version change.
-
----
-
-## 6. Plugin manifest schema (plugin.yaml)
+**Purpose:** specify exactly what a valid plugin looks like, so the validator
+(§17) and bootstrap can accept or quarantine deterministically.
 
 ```yaml
-name: <slug>                # required, lowercase-hyphens
+name: <slug>                # required, ^[a-z0-9-]+$
 version: 1.0.0              # required, semver
-core: ">=2.0.0"             # required, core version range this targets
-provenance: agent|user|third-party   # default: user
+core: ">=3.0.0"             # required, core version range this targets
+provenance: user            # required: agent|user|third-party
 enabled: true
-extension_points: [skill, tool, hook]   # which seams this uses
+extension_points: [skill, tool, hook]   # which seams this uses (§7)
 contributes:
   skills: []                # dirs under this plugin
   memory: []                # memory fact files
   tools:  []                # executable entrypoints
-hooks:
+hooks:                      # lifecycle callbacks (§9)
   on-bootstrap: ""
   on-load: ""
   on-save: ""
   on-curate: ""
-allowed_tools: []          # optional: restrict the tools this plugin may use
-mcp_servers:               # optional: declared external systems (launch by config, not bundled)
+allowed_tools: []          # optional: restrict tools this plugin may use
+mcp_servers:               # optional: declared external systems
   - name: ""
     command: ""            # e.g. "npx @modelcontextprotocol/server-postgres"
     args: []
@@ -162,143 +246,152 @@ mcp_servers:               # optional: declared external systems (launch by conf
 description: "..."
 ```
 
-Validation rules: unknown `extension_points`, missing `core` range, or a hook
-pointing at a non-existent path → quarantine.
+**Validation rules** (→ quarantine if violated, never delete): unknown
+`extension_points`, missing/invalid `core` range, unknown `provenance`,
+invalid `id`/`version`, a hook pointing at a non-existent path, or
+`contributes` dirs that don't exist.
 
 ---
 
-## 7. Versioning & compatibility
+## 9. Hooks (lifecycle callbacks)
+
+**Purpose:** let extensions react to framework events without touching core.
+
+Built-in events, ordered:
+
+- `on-bootstrap` — when the framework initializes.
+- `on-load`      — when a skill is invoked.
+- `on-save`      — after a memory/skill write.
+- `on-curate`    — before/after a curator transition.
+- `on-shutdown`  — optional teardown.
+
+A hook is a shell script declared in `plugin.yaml`. It runs with `PLUGIN_DIR`
+and `EVENT` in the environment; a non-zero exit warns but never aborts the
+framework.
+
+---
+
+## 10. Core skills
+
+**Purpose:** enumerate the framework's own (curator-immune) skills.
+
+| Skill | Purpose |
+|-------|---------|
+| `foundation-operator` | Govern the framework itself: add/remove extensions, audit consistency, curate skills, manage memory lifecycle, declare MCP, bump versions. |
+| `extract-learnings` | At task/session end, distill what was done and how into the learnings store. |
+
+Core skills live in `core-skills/<name>/SKILL.md`, carry `provenance: core`,
+and are exempt from every curator transition (§16.9).
+
+---
+
+## 11. Curation (skill lifecycle)
+
+**Purpose:** maintain skills safely — the "you are the curator" rule.
+
+1. **Track usage** in `curator/.usage.json` (use_count, view_count,
+   patch_count, last_activity_at, state, pinned).
+2. **Stale** after `stale_after_days` idle → mark stale.
+3. **Archive** past `archive_after_days` → move to `curator/archived/`.
+   **Never hard-delete.**
+4. **Back up** to `curator/.backup/` before every transition.
+5. **Pin** to protect — pinned skills are immune to every transition.
+6. **Honor provenance** — only `agent` skills are fully curatable.
+7. **Consolidate** overlapping skills into an umbrella only when clearly
+   beneficial and verified (§14); archive the originals. Off unless opted in.
+8. **Trace** every event to `curator/.traces/` (what, why, before, after,
+   result) — observability as convention, no daemon.
+
+---
+
+## 12. Memory lifecycle (forgetting & staleness)
+
+**Purpose:** decide what to store, when to load, when to forget — explicitly.
+
+- **Provenance tags:** write `@since YYYY-MM-DD` and optionally `@retain <days>`
+  (default: forever until contradicted). Plain-text conventions the agent reads.
+- **Forgetting:** a fact is archived when it is (a) superseded/contradicted,
+  (b) its `@retain` expires and is unused, or (c) unreferenced past
+  `stale_after_days`. Forgetting is **archival, never deletion**.
+- **Consolidation:** fold the episodic log into semantic memory (promote durable
+  facts), drop transient events, archive raw episodes past retention.
+
+---
+
+## 13. Authoring rules (concise is key)
+
+**Purpose:** specify how to write a good skill, so skills are discoverable and lean.
+
+- The `description` is the **trigger** — first ~57 chars must state *what* and
+  *when to use*. A vague description = never discovered.
+- The body is **lean**: numbered steps, exact commands, a short Pitfalls list, a
+  Verify step. Avoid prose, duplicated knowledge, long examples.
+- Prefer several small, single-purpose skills over one sprawling skill.
+- Keep SKILL.md frontmatter **conformant**: `name`, `description` required;
+  `license`, `compatibility`, `allowed-tools` optional but encouraged.
+
+---
+
+## 14. Skill evaluation (verification loop)
+
+**Purpose:** ensure the curator only adopts proven skills (no blind evolution).
+
+- A skill is **eligible** once used successfully (≥2 passes) or after a
+  user-correction that worked.
+- Before **consolidating** two skills, verify the umbrella against one example
+  from each source; confirm the outcome; trace it.
+
+---
+
+## 15. Versioning & compatibility
+
+**Purpose:** keep the framework and its extensions from silently breaking each other.
 
 - Core and plugins use **semver** (MAJOR.MINOR.PATCH).
 - A plugin declares the `core` range it targets; bootstrap enforces it.
-- Core bumps: **MINOR** = additive (new extension point), **MAJOR** = breaking.
+- Core bumps: **MINOR** = additive (new extension point / section),
+  **MAJOR** = breaking.
 - Incompatible plugins are quarantined + reported, never deleted.
 
 ---
 
-## 8. Core self-management (the three stores)
+## 16. Hard rules (never violate)
 
-### Store 1 — Memory (`memory/memory.md`)
-Durable **environment facts**: tool quirks, working approaches, gotchas, stable
-conventions. **Save** when the user states a preference/correction or you discover
-a costly workaround. **Never save** task progress, completed-work logs, PR numbers,
-SHAs, or anything stale in a week (recover from session history). Write as
-**declarative facts**, not imperatives ("The build uses uv" ✓ / "Always use uv" ✗).
-Respect the budget — prune/consolidate in one pass rather than bloat.
-
-### Store 2 — User profile (`memory/profile.md`)
-**Identity + preferences**: name, role, voice/tone, values, standing preferences.
-Person ≠ environment ≠ procedure. Keep separate from Memory. Profile is the most
-stable store: it changes rarely, is read every turn, and is never subject to
-staleness — only explicit update or user correction.
-
-### Store 3 — Skills & curator (`core-skills/` + `extensions/`)
-Reusable procedures. **Create** after 5+ tool calls, non-trivial error recovery,
-a user correction that worked, or a repeatable workflow. Each SKILL.md: trigger
-description, numbered steps with exact commands, a Pitfalls section, verification.
-**Patch immediately** when a run shows it's stale/wrong — an unmaintained skill is
-a liability. Structure per the format in §2's `core-skills/<name>/SKILL.md`.
-
-### Store 4 — Episodic log (`memory/episodic/`, per-session files)
-A lightweight **session history** distinct from semantic facts. This is the
-industry "episodic memory": *what happened*, not *what is true*. On session end
-(or on request), append a short dated entry
-(`memory/episodic/YYYY-MM-DD.md`) recording: what was attempted, what worked,
-what failed, decisions taken. It is **append-only and cheap** — no per-turn
-budgeting — and is *not injected* every turn. Load it only when the user asks
-"what did we do before" or when continuity matters. **Lifecycle:** old episodes
-are consolidated (see §11) and forgotten past a retention window; they are never
-used to justify a current fact on their own — a fact must be promoted into
-`memory.md` (semantic) to become durable.
-
----
-
-## 11. Memory lifecycle (forgetting & staleness)
-
-Every memory entry carries a lifecycle. Follow the industry rule — decide **what
-to store, when to load, when to forget** — explicitly, in the file, so it survives
-across agents.
-
-- **Provenance tags:** write entries as `@since YYYY-MM-DD` and, where useful,
-  `@retain <days>` (optional; default is forever until contradicted). These are
-  plain text conventions the agent reads — no software needed.
-- **Load policy (retrieval & routing):** profile is **always** loaded (stable,
-  small). Semantic `memory.md` is **loaded on demand** when the task needs it —
-  do not dump it into every prompt; the description/trigger decides. Episodic log
-  is loaded **only on continuity requests**. This keeps context lean (the
-  industry "context window is a public good" rule).
-- **Forgetting:** a fact is **forgotten** (moved to `curator/archived/` or the
-  memory archive) when: (a) it is superseded/contradicted, (b) its `@retain`
-  window expires and it is no longer used, or (c) it is stale by usage (unreferenced
-  for `stale_after_days`). Forgetting is **archival, never deletion**.
-- **Consolidation:** on a regular pass (mirror of curator), fold the episodic log
-  into semantic `memory.md` (promote durable facts), drop transient events, and
-  archive the raw episode files past retention. This is the "extraction" step done
-  as a convention.
-
----
-
-## 12. Authoring rules (concise is key)
-
-The context window is a public good. Only a skill's `name`+`description` pre-load;
-the body is read only when relevant. Therefore:
-
-- The `description` is the **trigger** — first ~57 chars must state *what* and
-  *when to use* the skill. A vague description = never discovered.
-- The body is **lean**: numbered steps, exact commands, a short Pitfalls list, a
-  Verify step. Avoid prose, duplicated knowledge, and long examples.
-- Prefer several small, single-purpose skills over one sprawling skill.
-- Keep SKILL.md frontmatter **conformant** (see §2 / the spec): `name`,
-  `description` required; `license`, `compatibility`, `allowed-tools` optional but
-  encouraged for portability.
-
----
-
-## 13. Skill evaluation (verification loop)
-
-Curation without verification is half a loop (EvoSkills/SkillOpt). Adopt a
-skill only after it has proven itself:
-
-- A skill is **eligible** once it has been used successfully (≥2 passes) or after
-  a user-correction that worked.
-- Before the curator **consolidates** two skills into an umbrella, verify the
-  result: run the umbrella's steps against one example from each source skill and
-  confirm the outcome. Keep a short trace.
-- **Trace log:** maintain `curator/.traces/` — one small file per curation or
-  skill-use event (what changed, why, result). This is observability-as-convention:
-  plain text, no daemon.
-
----
-
-## 14. Hard rules (never violate)
+**Purpose:** enumerate the invariants that cannot be broken.
 
 1. **Never hard-delete.** Archive is the max destructive action, everywhere.
 2. **Back up before any curation transition.** Rollback must always be possible.
-3. **Validate before registering.** Unknown/incompatible plugins → quarantine, never run.
+3. **Validate before registering.** Unknown/incompatible plugins → quarantine,
+   never run.
 4. **Respect `enabled` and `pinned`.** Dormant stays dormant; pinned stays immune.
 5. **Memory is declarative facts, not directives.** No "always do X".
 6. **Respect the budget** — prune to make room, don't bloat.
 7. **Ask before creating** a skill or writing to profile.
-8. **Keep the stores separate.** Person ≠ environment ≠ procedure ≠ history.
+8. **Keep the stores separate.** Person ≠ environment ≠ procedure ≠ history ≠
+   how-to-knowledge.
 9. **Honor provenance.** `core` is never touched by the curator.
-10. **No software in the core.** External systems are *declared*, never bundled or
-    installed by the framework.
-11. **Forget by archiving, promote by consolidation.** A current fact must live in
-    semantic memory; ephemeral events stay in the episodic log.
+10. **No software in the core.** External systems are *declared*, never bundled
+    or installed by the framework.
+11. **Forget by archiving, promote by consolidation.** A current fact must live
+    in semantic memory; ephemeral events stay in the episodic log.
 
 ---
 
-## 15. Verify
+## 17. Verify
+
+**Purpose:** provide the checklist for confirming the framework is consistent.
 
 - `MANIFEST.md` exists and lists every extension in `extensions/` with a valid
   `plugin.yaml`; none are silently missing.
-- `curator/.usage.json`, `curator/.backup/`, `curator/archived/`, and
-  `curator/.traces/` exist; `archived/` holds only non-deleted, restorable items.
-- Memory + profile + episodic files exist; memory under budget, declarative, no
-  task logs/SHAs; entries carry `@since` provenance tags.
+- `curator/.usage.json`, `curator/.backup/`, `curator/.traces/`, and
+  `curator/archived/` exist; `archived/` holds only non-deleted, restorable items.
+- Memory + profile + episodic + learnings files exist; memory under budget,
+  declarative, no task logs/SHAs; entries carry `@since` provenance tags.
 - Every plugin declares `core`, `extension_points`, and `provenance`; hooks and
   `mcp_servers` point at real paths; `allowed_tools` are valid if set.
 - A new extension added to `extensions/` and registered in `MANIFEST.md` is
   discoverable on next bootstrap.
-- The validator (`tools/validate_manifest.py`) exits 0 with no dependencies
-  beyond the Python standard library.
+- The validator exits 0 with no dependencies beyond the Python standard library:
+  ```bash
+  python3 tools/validate_manifest.py --root .
+  ```

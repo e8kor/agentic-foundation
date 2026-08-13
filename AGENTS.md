@@ -13,7 +13,7 @@ Point `FOUNDATION_ROOT` at it, then follow the rules below.
 
 ---
 
-## You maintain four stores
+## You maintain five stores
 
 1. **Memory** — `memory/memory.md` (or repo `.claude/memory.md`). Durable
    environment facts: tool quirks, gotchas, working approaches, stable
@@ -32,6 +32,10 @@ Point `FOUNDATION_ROOT` at it, then follow the rules below.
    happened (not what's true). Append-only, loaded only on continuity requests;
    consolidate durable facts into memory and archive old episodes. A fact must be
    promoted to semantic memory to become durable.
+5. **Learnings** — `learnings/YYYY-MM-DD.md`. Distilled how-to-work knowledge:
+   **What / How / Decisions / Gotchas / Repeat / Avoid / Resume** from each
+   work unit, so the next agent starts ahead. Read the latest at session start;
+   write it at task/session end. Promote recurring procedures to skills.
 
 ## Curator rules (you are the curator)
 

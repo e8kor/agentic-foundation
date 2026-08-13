@@ -1,6 +1,6 @@
 # Curator trace log — observability as convention (plain text, no daemon).
 
-Per CORE.md §13: one small file per curation or skill-use event, recording
+Per CORE.md §11: one small file per curation or skill-use event, recording
 WHAT changed, WHY, and the RESULT. This is the framework's audit trail.
 
 Each file: <timestamp>-<event>.md  (e.g. 2026-08-12T10-00-consolidate.md)

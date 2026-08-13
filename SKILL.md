@@ -1,7 +1,7 @@
 ---
 name: foundation-core
-description: "Framework core: self-management + open extension system. Loads CORE.md (the authoritative spec). Use as the framework entrypoint."
-version: 2.0.0
+description: "Agentic Foundation framework core: self-management + open extension system. Loads CORE.md (the authoritative spec). Use as the framework entrypoint."
+version: 3.0.0
 author: Agentic Foundation
 license: MIT
 metadata:
@@ -9,20 +9,21 @@ metadata:
     core: CORE.md
 ---
 
-# Foundation — entry point
+# Agentic Foundation — entry point
 
-This skill is the **boot entry** for the Foundation skill framework. The
+This skill is the **boot entry** for the Agentic Foundation framework. The
 authoritative spec lives in `CORE.md` in the framework root (repo `.foundation/`
 or global `~/.foundation/`); this file simply loads it.
 
 Read, in order:
 
-1. **`CORE.md`** — the framework contract: directory convention, manifest,
-   extension points (skill / memory / tool / hook / policy / adapter), lifecycle,
-   versioning, the three self-management stores, and the hard rules.
+1. **`CORE.md`** — the framework contract (17 sections): identity, contract,
+   directory layout, the five stores, manifest, load policy, extension points,
+   plugin schema, hooks, core skills, curation, memory lifecycle, authoring,
+   evaluation, versioning, hard rules, and verify.
 2. **`MANIFEST.md`** — the installed-extension registry; what is enabled and valid.
 3. **`extensions/README.md`** — how to build a plugin (`plugin.yaml` schema,
-   contributing skills/tools/hooks/policy/adapters).
+   contributing skills/tools/hooks/policy/adapters/mcp).
 
 ## Quick bootstrap
 

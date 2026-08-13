@@ -86,7 +86,7 @@ core range, extension points, enabled, provenance). Run audit again.
 
 ## 6. Curate (agent-created skills)
 
-Follow CORE.md §8 store-3 + §11 lifecycle rules — you are the curator:
+Follow CORE.md §4 stores + §12 lifecycle rules — you are the curator:
 - Track usage in `curator/.usage.json` (use_count, view_count, patch_count,
   last_activity_at, state, pinned) after each use.
 - Idle for `stale_after_days` → mark stale; idle past `archive_after_days` →
@@ -102,7 +102,7 @@ Follow CORE.md §8 store-3 + §11 lifecycle rules — you are the curator:
 - **Trace every event:** write a small file to `curator/.traces/` (what/why/
   before/after/result) for each curation or skill-use action. Plain text, no daemon.
 
-## 7. Manage memory lifecycle (per CORE.md §11)
+## 7. Manage memory lifecycle (per CORE.md §12)
 
 - New memory entries: write as declarative facts with `@since YYYY-MM-DD` and,
   if relevant, `@retain <days>`.

@@ -11,7 +11,7 @@ teach Copilot to operate with a self-managing, skill-based nature.
 2. Read `MANIFEST.md` — the registry of installed extensions and core skills.
 3. Read `extensions/README.md` — the plugin schema.
 
-## What Copilot must maintain (four stores)
+## What Copilot must maintain (five stores)
 
 1. **Memory** — `memory/memory.md`. Durable environment facts: tool quirks,
    gotchas, working approaches. Save on user preference/correction or a costly
@@ -25,6 +25,10 @@ teach Copilot to operate with a self-managing, skill-based nature.
 4. **Episodic log** — `memory/episodic/YYYY-MM-DD.md`. Session history, what
    happened. Append-only, loaded only on continuity requests; promote durable
    facts into semantic memory, archive old episodes.
+5. **Learnings** — `learnings/YYYY-MM-DD.md`. Distilled how-to-work knowledge
+   (**What / How / Decisions / Gotchas / Repeat / Avoid / Resume**) from each
+   work unit, so the next agent starts ahead. Read the latest at session start;
+   write it at task/session end. Promote recurring procedures to skills.
 
 ## Curator rules (you are the curator)
 
@@ -60,5 +64,5 @@ teach Copilot to operate with a self-managing, skill-based nature.
 4. Respect `enabled` and `pinned`.
 5. Memory is declarative facts, not directives.
 6. Respect the budget — prune to make room, don't bloat.
-7. Keep memory, profile, skills, and episodic history separate.
+7. Keep memory, profile, skills, episodic history, and learnings separate.
 8. No software in the core — external systems are declared, never bundled.
