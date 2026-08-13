@@ -1,0 +1,18 @@
+# Foundation extension configuration
+# Copy this to foundation-config.yml (or foundation-config.local.yml for local overrides).
+# Env overrides use the SPECKIT_FOUNDATION_* prefix, e.g. SPECKIT_FOUNDATION_FRAMEWORK_ROOT.
+
+# Where the Foundation framework lives. Defaults to ".foundation" (project) or repo root.
+framework_root: ".foundation"
+
+# Curator thresholds (mirrors core-skills/foundation-operator policy)
+curator:
+  stale_after_days: 60
+  archive_after_days: 180
+
+# Load policy: which store is injected every turn vs. on demand.
+#   profile = always, memory = on-demand, episodic = continuity-only
+load_policy:
+  profile: always
+  memory: on-demand
+  episodic: continuity-only

@@ -1,0 +1,149 @@
+name: Pack & Publish Spec-Kit Extension
+
+# Packs the spec-kit extension (speckit-ext/) into a ZIP, verifies it installs
+# cleanly into a real spec-kit project, and publishes the artifact + a GitHub
+# Release on version tags.
+#   - Install from artifact/zip:  specify extension add <name> --from <zip-url>
+#   - Release zip layout: extension.yml sits at the ZIP root (spec-kit expects this).
+
+on:
+  push:
+    branches: [main, feat/speckit-extension]
+    tags: ["v*"]
+  pull_request:
+    branches: [main, feat/speckit-extension]
+    paths: ["speckit-ext/**", ".github/workflows/speckit-extension.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: speckit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: Validate & pack
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      zip_name: ${{ steps.pack.outputs.zip_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from manifest
+        id: version
+        run: |
+          VERSION=$(sed -n 's/^  version: "\([^"]*\)".*/\1/p' speckit-ext/extension.yml | head -1)
+          if [ -z "$VERSION" ]; then echo "::error::could not extract version from extension.yml"; exit 1; fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "manifest version: $VERSION"
+
+      - name: Validate manifest (schema v1.0 conformance)
+        run: |
+          set -e
+          test -f speckit-ext/extension.yml
+          grep -q 'schema_version: "1.0"' speckit-ext/extension.yml
+          grep -Eq '^  id: "[a-z0-9-]*"' speckit-ext/extension.yml
+          # every referenced command file must exist
+          while read -r f; do
+            [ -f "speckit-ext/$f" ] || { echo "::error::missing command file $f"; exit 1; }
+          done < <(sed -n 's/^      file: "\([^"]*\)"$/\1/p' speckit-ext/extension.yml)
+          echo "manifest schema OK; referenced files present"
+
+      - name: Pack ZIP
+        id: pack
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          ZIP="dist/agentic-foundation-speckit-${VERSION}.zip"
+          mkdir -p dist
+          (cd speckit-ext && zip -r "../$ZIP" . -x '.*')
+          echo "zip_name=$(basename "$ZIP")" >> "$GITHUB_OUTPUT"
+          echo "packed: $(basename "$ZIP") ($(du -h "$ZIP" | cut -f1))"
+          echo "--- zip contents ---"
+          unzip -l "$ZIP"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: speckit-extension
+          path: dist/*.zip
+          if-no-files-found: error
+          retention-days: 30
+
+  # Proves the packed extension actually installs into a real spec-kit project
+  # and its commands/skills register. Mirrors local manual verification.
+  integration-test:
+    name: Verify it installs
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: speckit-extension
+          path: dist
+
+      - name: Install spec-kit CLI (official source, not the PyPI stub)
+        run: |
+          # ubuntu-latest doesn't ship uv; install it first
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
+          uv tool install specify-cli --force \
+            --from git+https://github.com/github/spec-kit.git
+          specify version 2>&1 | grep -i "cli version" | head -1
+
+      - name: Init a throwaway spec-kit project (Copilot integration)
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          mkdir -p /tmp/kit-test && cd /tmp/kit-test
+          specify init . --integration copilot
+
+      - name: Install the packed extension from the zip (over localhost HTTP, as a release asset would be fetched)
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          cd /tmp/kit-test
+          ZIP=$(ls "$GITHUB_WORKSPACE"/dist/*.zip | head -1)
+          # Serve the zip over localhost HTTP (spec-kit allows http://localhost URLs)
+          python3 -m http.server 8080 --directory "$(dirname "$ZIP")" &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          # wait for server to come up
+          for i in $(seq 1 20); do curl -sf "http://localhost:8080/$(basename "$ZIP")" >/dev/null && break; sleep 0.5; done
+          curl -sf "http://localhost:8080/$(basename "$ZIP")" >/dev/null || { echo "::error::zip not reachable"; exit 1; }
+          # --from triggers an interactive untrusted-source prompt; pipe 'y' to accept
+          # in this non-interactive CI step (the URL is our own localhost artifact).
+          echo "y" | specify extension add foundation \
+            --from "http://localhost:8080/$(basename "$ZIP")" --force
+
+      - name: Assert install was clean (listed, enabled, 3 commands, skills registered)
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          cd /tmp/kit-test
+          set -e
+          # 1. extension is listed + enabled
+          specify extension list | grep -q "Foundation Skill Framework" || { echo "::error::extension not listed"; exit 1; }
+          specify extension list | grep -q "Status: Enabled" || { echo "::error::extension not enabled"; exit 1; }
+          specify extension list | grep -q "Commands: 3 | Hooks: 1" || { echo "::error::expected 3 commands / 1 hook"; exit 1; }
+          # 2. the 3 commands are registered as Copilot skills
+          for skill in speckit-foundation-audit speckit-foundation-add-extension speckit-foundation-memory; do
+            [ -f ".github/skills/$skill/SKILL.md" ] || { echo "::error::missing registered skill $skill"; exit 1; }
+          done
+          # 3. config scaffolded
+          [ -f ".specify/extensions/foundation/foundation-config.yml" ] || { echo "::error::config not scaffolded"; exit 1; }
+          echo "integration OK: extension listed+enabled, 3 skills registered, config scaffolded"
+
+  release:
+    name: Publish GitHub Release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [package, integration-test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: speckit-extension
+          path: dist
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
