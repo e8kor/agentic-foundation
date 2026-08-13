@@ -1,7 +1,7 @@
 ---
 name: foundation-core
 description: "Agentic Foundation framework core: self-management + open extension system. Loads CORE.md (the authoritative spec). Use as the framework entrypoint."
-version: 3.0.0
+version: 3.1.0
 author: Agentic Foundation
 license: MIT
 metadata:

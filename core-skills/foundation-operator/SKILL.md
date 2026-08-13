@@ -1,7 +1,7 @@
 ---
 name: foundation-operator
 description: "Operate on the Agentic Foundation framework: audit, extend, and improve every edge (adapters, stores, extensions, spec-kit packaging, curator, tooling). Use when modifying the framework itself."
-version: 2.0.0
+version: 2.1.0
 author: foundation-core
 license: MIT
 metadata:
@@ -186,6 +186,24 @@ Follow CORE.md §11 curation + §12 memory lifecycle — you are the curator:
   or a user-correction. Before consolidating, verify the umbrella against one
   example from each source skill.
 - **Trace every event** to `curator/.traces/` (what/why/before/after/result).
+
+### Skill improvement & mutation policy (CORE.md §11.2–11.4)
+- **Improve by patching, not rewriting.** Preserve working structure, identity,
+  and provenance; bump the skill's version on any change.
+- **Keep one skill one job.** A skill used for two distinct jobs is a signal to
+  split.
+- **Extraction rule (the crossing rule):** when a skill's mutation begins to
+  cross significantly with a distinct potential skill, extract it into its own
+  skill. Trigger when **two or more** hold: two audiences/triggers, two
+  unrelated workflows, body >~1 page (or Pitfalls covering two failure domains),
+  or shared knowledge with another skill. Back up first, create the new skill
+  with provenance preserved, remove the extracted concern from the source (add a
+  pointer), bump the source version, register the new skill in MANIFEST.md,
+  verify both (§14), and trace.
+- **Don't extract prematurely.** One coherent procedure with two steps is not two
+  skills; the crossing must be *significant*.
+- **Merge upward** only when it reduces cognitive load and stays single-purpose;
+  never merge two skills with different triggers just to reduce count.
 
 ### Memory lifecycle (CORE.md §12)
 - New entries: declarative facts with `@since YYYY-MM-DD`, optional `@retain`.

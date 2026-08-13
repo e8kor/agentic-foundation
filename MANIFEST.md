@@ -1,8 +1,8 @@
 # Agentic Foundation Manifest
 
 - **Framework:** foundation
-- **Version:** 3.0.0
-- **min_core_version:** 3.0.0
+- **Version:** 3.1.0
+- **min_core_version:** 3.1.0
 - **Provenance of this file:** core
 
 ## Extension points (seams) — see CORE.md §7
@@ -31,11 +31,16 @@
 
 | Name | Version | Purpose |
 |------|---------|---------|
-| `foundation-operator` | 2.0.0 | Operate on the framework across all six edges: audit consistency, extend/improve adapters, extensions, spec-kit packaging, stores, curator, and tooling; bump core versions. Keeps every edge in sync. |
+| `foundation-operator` | 2.1.0 | Operate on the framework across all six edges: audit consistency, extend/improve adapters, extensions, spec-kit packaging, stores, curator (incl. skill improvement & extraction policy), and tooling; bump core versions. Keeps every edge in sync. |
 | `extract-learnings` | 1.0.0 | Extract work learnings at task/session end (What/How/Decisions/Gotchas/Repeat/Avoid/Resume) so the next agent starts ahead. |
 
 ## Changelog
 
+- **3.1.0** — Skill improvement & mutation policy added (CORE.md §11.2–11.4):
+  patch-not-rewrite, one-skill-one-job, version-bump-on-change, the **extraction
+  (crossing) rule** — when a skill's mutation crosses significantly with a
+  distinct potential skill (≥2 signals), extract it into its own skill — and a
+  merge/consolidation policy. Operator skill updated with the same rules.
 - **3.0.0** — Refactor to a clean, sequential spec (17 sections, logical flow:
   identity → contract → structure → data → extensibility → lifecycle → quality →
   governance → verification). Fixed broken numbering, consolidated hooks, added

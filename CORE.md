@@ -1,7 +1,7 @@
 ---
 name: foundation-core
 description: "Framework core: self-management (memory/profile/skills/learnings) + open extension system. The seed every skill, tool, and plugin plugs into."
-version: 3.0.0
+version: 3.1.0
 author: Agentic Foundation
 license: MIT
 platforms: [linux, macos, windows]
@@ -285,9 +285,11 @@ and are exempt from every curator transition (§16.9).
 
 ---
 
-## 11. Curation (skill lifecycle)
+## 11. Curation & skill improvement (skill lifecycle)
 
-**Purpose:** maintain skills safely — the "you are the curator" rule.
+**Purpose:** maintain and improve skills safely — the "you are the curator" rule.
+
+### 11.1 The curation pipeline
 
 1. **Track usage** in `curator/.usage.json` (use_count, view_count,
    patch_count, last_activity_at, state, pinned).
@@ -301,6 +303,61 @@ and are exempt from every curator transition (§16.9).
    beneficial and verified (§14); archive the originals. Off unless opted in.
 8. **Trace** every event to `curator/.traces/` (what, why, before, after,
    result) — observability as convention, no daemon.
+
+### 11.2 Skill improvement policy
+
+Every mutation of a skill (patch, merge, split, rename, or extract) must be
+deliberate, safe, and traceable:
+
+- **Improve by patching, not rewriting.** Fix a skill by targeted edits that
+  preserve its working structure, identity, and provenance. A full rewrite is a
+  last resort and counts as a new skill (see §11.3).
+- **Keep one skill one job.** A skill should have a single, cohesive purpose.
+  If a skill is being used for two distinct jobs, that is a signal to split.
+- **Bump version on change.** Any behavioral change bumps the skill's PATCH
+  (or MINOR for a new capability). Update `MANIFEST.md` and the changelog.
+- **Trace the change.** Record what changed, why, and the result in
+  `curator/.traces/`.
+
+### 11.3 Extraction policy (the crossing rule)
+
+**When a skill's mutation begins to cross significantly with a distinct
+potential skill, extract the new concern into its own skill.**
+
+A skill is "crossing" when it starts to accumulate material for a second,
+separable concern. Trigger the extraction when **two or more** of these hold:
+
+1. **Two audiences** — different triggers use the skill (the description no
+   longer captures all the ways it's invoked).
+2. **Two workflows** — the skill has two clear, unrelated step sequences
+   (e.g. "release" and "rollback" living in one skill).
+3. **Bloating body** — the body exceeds ~1 page (or a "Pitfalls" list that
+   covers two distinct failure domains).
+4. **Shared knowledge** — another skill or a would-be skill shares the same
+   facts, and deduplicating would help both.
+
+**How to extract (safe, per §11.2):**
+
+1. Identify the separable concern (name it, give it a trigger description).
+2. **Back up** the source skill to `curator/.backup/`.
+3. Create the new skill `core-skills/<name>/SKILL.md` (or
+   `extensions/<plugin>/skills/<name>/`) with `provenance` preserved.
+4. **Remove** the extracted concern from the source skill and add a pointer to
+   the new skill.
+5. **Bump** the source skill's version; register the new skill in `MANIFEST.md`.
+6. **Verify** both skills independently (§14) and trace the extraction.
+
+**Anti-rule:** do not extract prematurely. A single coherent procedure that
+happens to have two steps is not two skills. Extract only when the crossing is
+**significant** (two or more signals above), not on every minor addition.
+
+### 11.4 Merging / consolidation policy
+
+- **Merge upward** (fold overlapping skills into an umbrella) only when it
+  reduces cognitive load and the merged skill stays single-purpose.
+- **Never merge** two skills that serve different triggers just to reduce count —
+  that recreates the crossing problem this policy is meant to prevent.
+- Verify the umbrella against examples from each source before adopting (§14).
 
 ---
 
