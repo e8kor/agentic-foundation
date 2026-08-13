@@ -79,4 +79,4 @@ Confirm the fact was appended with its `@since` provenance tag.
 
 - Write declarative facts, not directives ("The build uses uv" ✓ / "Always use
   uv" ✗).
-- Never store task progress, PR numbers, or SHAs (per CORE.md §11).
+- Never store task progress, PR numbers, or SHAs (per CORE.md §12).

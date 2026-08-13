@@ -86,7 +86,7 @@ match.
 - Core version (currently **3.0.0**).
 - Any hard rule or load-policy change.
 
-**Verify:** every adapter's "stores" list matches CORE.md §4; versions match.
+**Verify:** every adapter's "stores" list matches CORE.md §5; versions match.
 
 ---
 
@@ -97,7 +97,7 @@ match.
 ROOT=...  # as above
 mkdir -p "extensions/<plugin>/skills" "extensions/<plugin>/tools" \
          "extensions/<plugin>/hooks" "extensions/<plugin>/memory"
-# write extensions/<plugin>/plugin.yaml  (schema: extensions/README.md, CORE.md §8)
+# write extensions/<plugin>/plugin.yaml  (schema: extensions/README.md, CORE.md §9)
 python3 tools/validate_manifest.py --root .        # must pass
 ```
 Register it in `MANIFEST.md` under "Installed extensions" (name, version, core
@@ -117,7 +117,7 @@ range, extension points, enabled, provenance). Run audit again.
 
 ### Add an extension point (new seam)
 Adding a new extension point (e.g. `retrieval`, `evaluator`) is a **MINOR** core
-bump. Do it in CORE.md §7, update the validator's `KNOWN_POINTS`, and note it in
+bump. Do it in CORE.md §8, update the validator's `KNOWN_POINTS`, and note it in
 the changelog.
 
 ---
@@ -148,7 +148,7 @@ add a core store or operation, consider a matching speckit command.
 
 ## 5. Improve / extend the stores (E4)
 
-The five stores (CORE.md §4):
+The five stores (CORE.md §5):
 1. Semantic memory (`memory/memory.md`) — facts.
 2. User profile (`memory/profile.md`) — who the user is.
 3. Episodic log (`memory/episodic/`) — history.
@@ -164,15 +164,15 @@ The five stores (CORE.md §4):
 - Patch immediately when a run shows staleness.
 
 ### Add a new store type (e.g. `knowledge/` for domain knowledge)
-This is a **MINOR** core bump. Add it to CORE.md §4 (the table + a subsection),
+This is a **MINOR** core bump. Add it to CORE.md §5 (the table + a subsection),
 add the dir, update the adapters' store list, and note in the changelog. Keep the
-load policy (CORE.md §6) updated with when it loads.
+load policy (CORE.md §7) updated with when it loads.
 
 ---
 
 ## 6. Improve / extend the curator (E5)
 
-Follow CORE.md §11 curation + §12 memory lifecycle — you are the curator:
+Follow CORE.md §12 curation + §12 memory lifecycle — you are the curator:
 - Track usage in `curator/.usage.json` (use_count, view_count, patch_count,
   last_activity_at, state, pinned) after each use.
 - Idle for `stale_after_days` → mark stale; past `archive_after_days` → archive
@@ -187,7 +187,7 @@ Follow CORE.md §11 curation + §12 memory lifecycle — you are the curator:
   example from each source skill.
 - **Trace every event** to `curator/.traces/` (what/why/before/after/result).
 
-### Skill improvement & mutation policy (CORE.md §11.2–11.4)
+### Skill improvement & mutation policy (CORE.md §12.2–11.4)
 - **Improve by patching, not rewriting.** Preserve working structure, identity,
   and provenance; bump the skill's version on any change.
 - **Keep one skill one job.** A skill used for two distinct jobs is a signal to
@@ -205,7 +205,7 @@ Follow CORE.md §11 curation + §12 memory lifecycle — you are the curator:
 - **Merge upward** only when it reduces cognitive load and stays single-purpose;
   never merge two skills with different triggers just to reduce count.
 
-### Memory lifecycle (CORE.md §12)
+### Memory lifecycle (CORE.md §13)
 - New entries: declarative facts with `@since YYYY-MM-DD`, optional `@retain`.
 - Session-end: append to `memory/episodic/YYYY-MM-DD.md`.
 - Consolidate: promote durable facts from episodic → semantic memory; archive
@@ -214,7 +214,7 @@ Follow CORE.md §11 curation + §12 memory lifecycle — you are the curator:
 
 ### Improve a policy
 - Plugin `policy:` blocks (in `plugin.yaml`) override curator defaults for that
-  plugin's items — but hard rules (CORE.md §16) always win.
+  plugin's items — but hard rules (CORE.md §17) always win.
 
 ---
 
@@ -229,7 +229,7 @@ The only tool is `tools/validate_manifest.py` — the stdlib-only validator.
   schema) and cross-check `MANIFEST.md` rows against `extensions/`.
 
 **Rule:** keep the validator stdlib-only (no pyyaml, no third-party imports) —
-this is a hard constraint (CORE.md §17).
+this is a hard constraint (CORE.md §18).
 
 ---
 
@@ -260,7 +260,7 @@ Adding an extension point or store = **MINOR** bump; removing/renaming one =
   edges (adapters, extensions, spec-kit, stores, curator, tooling). An edge you
   forget is an edge that drifts.
 - **Adding a dependency to the validator** — breaks the no-software principle
-  (CORE.md §17). Keep it stdlib-only.
+  (CORE.md §18). Keep it stdlib-only.
 - **Bumping speckit extension but not tagging** — CI only publishes a Release on
   `v*` tags; bump the version AND tag it, or the zip never ships.
 

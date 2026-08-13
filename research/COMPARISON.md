@@ -59,7 +59,7 @@ biggest axis of difference, and it's a deliberate tradeoff, not an accident.
 - Positions itself as a **context database**: one store for memory, knowledge
   (RAG), and skills, with retrieval.
 - **Lesson:** we split stores by *type* (semantic/episodic/profile/skills) but
-  have **no unified retrieval** — the "load on demand" policy in CORE.md §6 is
+  have **no unified retrieval** — the "load on demand" policy in CORE.md §7 is
   advisory, not a retrieval index. Their RAG/vector retrieval is the gap we
   deliberately deferred as "needs software." A future, optional `retrieval`
   provider would close it without violating no-software (it would be a *declared*
@@ -68,7 +68,7 @@ biggest axis of difference, and it's a deliberate tradeoff, not an accident.
 ### microsoft/SkillOpt (★16k) — the verification loop, made concrete
 - **"validation-gated updates"**: a skill is only adopted when a validator passes.
 - **Lesson:** this is exactly the **skill evaluation / verification loop** we
-  added in CORE.md §14. Ours is a convention ("≥2 uses, then verify"); theirs is
+  added in CORE.md §15. Ours is a convention ("≥2 uses, then verify"); theirs is
   an automated optimizer with a validation gate. Our approach is the 
   dependency-free, conservative version of their idea. Confirms §14 is the right
   direction — and that a future `evaluator` hook/point would let us plug in

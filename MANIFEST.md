@@ -1,11 +1,11 @@
 # Agentic Foundation Manifest
 
 - **Framework:** foundation
-- **Version:** 3.1.0
-- **min_core_version:** 3.1.0
+- **Version:** 3.2.0
+- **min_core_version:** 3.2.0
 - **Provenance of this file:** core
 
-## Extension points (seams) — see CORE.md §7
+## Extension points (seams) — see CORE.md §8
 
 | Point | Contributes | Example |
 |-------|-------------|---------|
@@ -17,7 +17,7 @@
 | `adapter` | bridge to other agent formats    | AGENTS.md exporter |
 | `mcp`     | declared MCP servers             | Postgres MCP server |
 
-## Hook events (ordered lifecycle) — see CORE.md §9
+## Hook events (ordered lifecycle) — see CORE.md §10
 
 `on-bootstrap` → `on-load` → `on-save` → `on-curate` → `on-shutdown`
 
@@ -27,7 +27,7 @@
 |------|---------|-----------|------------------|---------|-----------|
 | `example-plugin` | 1.1.0 | `>=2.0.0` | skill, tool, hook, policy, mcp | true | third-party |
 
-## Core skills (`core-skills/`, provenance: core, curator-immune) — see CORE.md §10
+## Core skills (`core-skills/`, provenance: core, curator-immune) — see CORE.md §11
 
 | Name | Version | Purpose |
 |------|---------|---------|
@@ -36,7 +36,11 @@
 
 ## Changelog
 
-- **3.1.0** — Skill improvement & mutation policy added (CORE.md §11.2–11.4):
+- **3.2.0** — Added §1 Motivation: why the framework exists and what it is a
+  foundation *for* (problem, idea, foundation-vs-skill, three commitments,
+  design principles). Renumbered all sections to 1–18 and updated every
+  cross-reference across the framework.
+- **3.1.0** — Skill improvement & mutation policy added (CORE.md §12.2–12.4):
   patch-not-rewrite, one-skill-one-job, version-bump-on-change, the **extraction
   (crossing) rule** — when a skill's mutation crosses significantly with a
   distinct potential skill (≥2 signals), extract it into its own skill — and a
