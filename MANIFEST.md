@@ -31,7 +31,7 @@
 
 | Name | Version | Purpose |
 |------|---------|---------|
-| `foundation-operator` | 1.1.0 | Governance: add/update/remove extensions, audit consistency, curate skills, manage memory lifecycle, declare MCP, bump core versions. Keeps the framework itself consistent. |
+| `foundation-operator` | 2.0.0 | Operate on the framework across all six edges: audit consistency, extend/improve adapters, extensions, spec-kit packaging, stores, curator, and tooling; bump core versions. Keeps every edge in sync. |
 | `extract-learnings` | 1.0.0 | Extract work learnings at task/session end (What/How/Decisions/Gotchas/Repeat/Avoid/Resume) so the next agent starts ahead. |
 
 ## Changelog
