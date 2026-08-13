@@ -59,19 +59,26 @@ GitHub issue: comment + close
 6. **Cron** — `kanban-github-sync` (every 5m, no_agent, runs the sweep).
 7. **Dispatcher** — runs inside the gateway (already active); no standalone daemon needed.
 
-## To wire the REAL GitHub webhook (required for live traffic)
+## To wire the REAL GitHub webhook (DONE — live via zrok)
 
-The webhook URL is `http://localhost:8644/webhooks/github-issues-to-kanban` —
-**GitHub cannot reach localhost**. To receive real GitHub events you must expose
-the endpoint publicly (tunnel) and register it in the repo:
+The webhook is exposed publicly via **zrok** and registered in the GitHub repo.
+Real GitHub issues now flow through automatically.
 
-1. Expose the port: `ngrok http 8644` (or cloudflared / zrok) → get a public URL.
-2. In GitHub repo → **Settings → Webhooks → Add webhook**:
-   - **Payload URL:** `https://<tunnel>/webhooks/github-issues-to-kanban`
-   - **Content type:** `application/json`
-   - **Secret:** the HMAC secret from `hermes webhook list`
-   - **Events:** select **Issues** (or "Let me select individual events" → Issues)
-3. Save. GitHub now POSTs opened/reopened issues to the listener.
+- **Public URL:** `https://jq7u85t05vmu.shares.zrok.io/webhooks/github-issues-to-kanban`
+- **zrok binary:** `~/.local/bin/zrok2` (v2, installed from cached deb; not on PATH by default)
+- **zrok share process:** `zrok2 share public http://localhost:8644 --headless` (running in background)
+- **GitHub webhook:** registered on `e8kor/agentic-foundation` (hook id `665198849`), events `issues`, HMAC secret from `hermes webhook list`
+
+**Verified live:** created real issue #9 → GitHub POSTed to the zrok URL → webhook created kanban task → dispatcher spawned `coder` → task completed → sync-back closed issue #9 with a comment. Full loop confirmed with real GitHub traffic.
+
+### To re-establish the tunnel after a reboot
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+zrok2 share public http://localhost:8644 --headless   # note the new URL it prints
+```
+
+Then update the GitHub webhook URL to the new zrok URL (the zrok URL changes each run unless you use a reserved share).
 
 ## Verify
 
