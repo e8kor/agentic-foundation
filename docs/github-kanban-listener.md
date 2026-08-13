@@ -106,6 +106,10 @@ hermes cron list | grep kanban-github-sync
 
 ## Notes / limitations
 
+- **Backfill:** a done kanban task with **no GitHub issue link** in its body now
+  gets a **mirror issue created** (labeled `kanban-mirror`) in the project repo,
+  then commented + closed — so nothing is left unsynced. Configure the target
+  repo via `KANBAN_SYNC_REPO` (default `e8kor/agentic-foundation`).
 - **Local-only webhook:** the endpoint is on localhost; real GitHub traffic needs
   a tunnel. The pipeline was verified by simulating the GitHub POST locally.
 - **Sync-back is pull-based** (cron sweep every 5m), not push — a completed task
@@ -113,4 +117,5 @@ hermes cron list | grep kanban-github-sync
 - **`kanban show` has a Hermes bug** for completed tasks (closed-DB traceback on
   the non-JSON path); the sync-back uses `--json` which works.
 - **Idempotency:** the sweep tracks synced task IDs in
-  `~/.hermes/kanban-sync-state.json`; a task is synced once.
+  `~/.hermes/kanban-sync-state.json`; a task is synced once. Both scripts load
+  `GITHUB_TOKEN` from `~/.hermes/.env` so they work under cron's fresh env.
